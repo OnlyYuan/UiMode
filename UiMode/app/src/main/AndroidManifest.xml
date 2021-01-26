@@ -6,6 +6,7 @@
     <uses-permission
         android:name="android.permission.INTERNET"
         tools:ignore="WrongManifestParent" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,11 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".activity.DrawTreeActivity"></activity>
-        <activity android:name=".activity.CombineActivity"
-                android:screenOrientation="landscape"
-                tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".activity.ThreeMenuActivity"></activity>
+        <activity android:name=".activity.Main2Activity" />
+        <activity android:name=".activity.CameraActivity" />
+        <activity android:name=".activity.DrawTreeActivity" />
+        <activity
+            android:name=".activity.CombineActivity"
+            android:screenOrientation="landscape"
+            tools:ignore="LockedOrientationActivity" />
         <activity android:name=".activity.DragAndAddActivity" />
         <activity android:name=".activity.DragActivity" />
         <activity android:name=".activity.ScaleActivity" />

@@ -1,10 +1,10 @@
 package com.example.uimode.mode;
 
 /**
- *
+ * 节点详细内容
  */
+public class TreeModeBody {
 
-public class TreeMode {
     private String name;//名字
     private String picString;//头像
 
@@ -25,6 +25,5 @@ public class TreeMode {
     public void setName(String name) {
         this.name = name;
     }
-
 
 }

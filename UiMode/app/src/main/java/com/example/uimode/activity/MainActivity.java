@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
     private MAdapter mAdapter;
-    private String[] mtitile={"拖拉效果","缩放","拖拉添加","树形画图","完整效果"};
+    private String[] mtitile={"拖拉效果","缩放","拖拉添加","树形画图","完整效果","三级菜单"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
                     case 4:
                         startActivity(new Intent(MainActivity.this,CombineActivity.class));
                         break;
+
+                    case 5:
+                        startActivity(new Intent(MainActivity.this,CameraActivity.class));
+                        break;
+                    case 6:
+
+
+
                 }
             }
         });

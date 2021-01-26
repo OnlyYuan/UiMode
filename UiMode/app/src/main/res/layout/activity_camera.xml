@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+    
+        <variable
+            name="cameraViewModel"
+            type="com.example.uimode.viewmodel.CameraViewModel" />
+        
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        >
+        <Button
+            android:id="@+id/camera_btn"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="拍照"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+</layout>
