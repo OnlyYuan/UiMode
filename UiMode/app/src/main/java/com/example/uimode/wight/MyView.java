@@ -1,6 +1,8 @@
 package com.example.uimode.wight;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
@@ -18,8 +20,12 @@ public class MyView extends SurfaceView {
     }
 
 
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+
+        Paint paint = new Paint();
 
 
-
-
+    }
 }

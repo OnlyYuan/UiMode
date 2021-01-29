@@ -26,7 +26,7 @@ public class TreeModeView extends LinearLayout {
     public TreeModeView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
-       View view= LayoutInflater.from(context).inflate(R.layout.tree_mode_layout,this,true); //添加组件
+        View view= LayoutInflater.from(context).inflate(R.layout.tree_mode_layout,this,true); //添加组件
 
         //初始化组件
         treePicView = view.findViewById(R.id.treePicView);

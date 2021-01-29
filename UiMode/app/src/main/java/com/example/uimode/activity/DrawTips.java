@@ -144,9 +144,9 @@ public class DrawTips {
 ////        insertLayout.addView(bLzgViews[i], layoutParams[i]);
 //
 //        }
-    }
-
-
+//    }
+//
+//
 
 
 }

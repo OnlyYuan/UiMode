@@ -7,7 +7,7 @@ import java.util.List;
  * 树形节点
  */
 
-public class TreeModeNode {
+public class ChildTreeModeNode {
 
 
     private String name;//名字
@@ -19,21 +19,12 @@ public class TreeModeNode {
 
 
     //孩子节点
-    private List<TreeModeNode > childNodeList = new ArrayList<TreeModeNode >();
+    private List<ChildTreeModeNode> childNodeList = new ArrayList<ChildTreeModeNode>();
 
     //层级
     private int mCount;
 
-    public TargetPostion getPostion() {
-        return postion;
-    }
 
-    public void setPostion(TargetPostion postion) {
-        this.postion = postion;
-    }
-
-    //位置
-    private TargetPostion postion;
 
     public String getName() {
         return name;
@@ -59,11 +50,11 @@ public class TreeModeNode {
         this.botherList = botherList;
     }
 
-    public List<TreeModeNode> getChildNodeList() {
+    public List<ChildTreeModeNode> getChildNodeList() {
         return childNodeList;
     }
 
-    public void setChildNodeList(List<TreeModeNode> childNodeList) {
+    public void setChildNodeList(List<ChildTreeModeNode> childNodeList) {
         this.childNodeList = childNodeList;
     }
 
@@ -76,6 +67,7 @@ public class TreeModeNode {
     }
 
 
+
     @Override
     public String toString() {
         return "TreeModeNode{" +
@@ -86,5 +78,7 @@ public class TreeModeNode {
                 ", mCount=" + mCount +
                 '}';
     }
+
+
 
 }
