@@ -92,7 +92,6 @@ class PhoneLIstActivity : AppCompatActivity() {
 
 
 
-
     /**
      * 获取 通讯录的列表
      */
@@ -106,11 +105,11 @@ class PhoneLIstActivity : AppCompatActivity() {
             var contactId:String = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
             var name:String = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
 
-
             var phoneCursor:Cursor? = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
             null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID+"="+contactId,null,null)
             mPersionMsg.name = name
             mPersionMsg.userId =contactId
+
 
             while (phoneCursor!!.moveToNext()){
                 var phoneNum :String = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
@@ -140,6 +139,9 @@ class PhoneLIstActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * 输出读取的数据
+     */
     private fun showMsg(){
         Thread{
             mContracts = getContacts()
@@ -155,9 +157,20 @@ class PhoneLIstActivity : AppCompatActivity() {
             handler.sendMessage(message)
 
         }.start()
+    }
 
+
+    /**
+     * 按首字母排序
+     */
+    private fun sortByLetter(mPersionMsgList:ArrayList<PersonMsg>){
+        mPersionMsgList
 
 
     }
 
+
+    /**
+     * 获取汉字的首字母
+     */
 }
