@@ -1,21 +1,22 @@
 package com.example.uimode.activity
 
-import android.content.ContentResolver
 import android.content.pm.PackageManager
 import android.database.Cursor
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.provider.ContactsContract
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uimode.R
 import com.example.uimode.mode.PersonMsg
-import java.security.Permission
+import net.sourceforge.pinyin4j.PinyinHelper
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType
 
 class PhoneLIstActivity : AppCompatActivity() {
     lateinit var mrecyclerView:RecyclerView
@@ -90,15 +91,22 @@ class PhoneLIstActivity : AppCompatActivity() {
     }
 
 
-
-
     /**
      * 获取 通讯录的列表
      */
     private fun getContacts():ArrayList<PersonMsg> {
 
+        val projectionString = arrayOf(
+
+                ContactsContract.Contacts._ID,
+                //ContactsContract.CommonDataKinds.Phone.NUMBER,
+                ContactsContract.Contacts.DISPLAY_NAME,
+
+        )
+
+
        var contacts = ArrayList<PersonMsg>()
-       var cursor: Cursor? = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null)
+       var cursor: Cursor? = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,projectionString,null,null,null)
         while (cursor!!.moveToNext()){
 
             var mPersionMsg:PersonMsg = PersonMsg()
@@ -106,7 +114,7 @@ class PhoneLIstActivity : AppCompatActivity() {
             var name:String = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
 
             var phoneCursor:Cursor? = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-            null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID+"="+contactId,null,null)
+                    projectionString,ContactsContract.CommonDataKinds.Phone.CONTACT_ID+"="+contactId,null,null)
             mPersionMsg.name = name
             mPersionMsg.userId =contactId
 
@@ -135,8 +143,6 @@ class PhoneLIstActivity : AppCompatActivity() {
         if (requestCode==100){
             showMsg()
         }
-
-
     }
 
     /**
@@ -165,12 +171,34 @@ class PhoneLIstActivity : AppCompatActivity() {
      */
     private fun sortByLetter(mPersionMsgList:ArrayList<PersonMsg>){
         mPersionMsgList
-
-
     }
 
 
     /**
-     * 获取汉字的首字母
+     * 获取汉字的拼音
      */
+    private fun getPinyin(list:ArrayList<PersonMsg>):ArrayList<PersonMsg>{
+
+        var fPinyin =" "
+        var fWord =" "
+        var format =  HanyuPinyinOutputFormat()
+        format.toneType = HanyuPinyinToneType.WITHOUT_TONE
+      //  var format = HanyuPinyinOutputFormat()
+        for (i in 0 until list.size){
+            fPinyin =" "
+            fWord = (list[i].name.get(0).toString())
+            if (fWord.matches(Regex("[\\u4E00-\\u9FA5]+"))){//是汉字
+                fPinyin = PinyinHelper.toHanYuPinyinString(fWord,format,null,true)
+                Log.i("1111","${fPinyin}:------------->${fPinyin}")
+                list[i].firstWord = fPinyin
+            }else {
+
+                list[i].firstWord = "#"
+            }
+        }
+
+        return list
+    }
+
+
 }

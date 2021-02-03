@@ -28,4 +28,12 @@ import android.os.Parcelable
           field =value
       }
 
+     var firstWord:String =""
+         get() {
+             return field
+         }
+         set(value) {
+             field =value
+         }
+
 }

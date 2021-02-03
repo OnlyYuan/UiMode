@@ -4,21 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:id="@+id/m_layout"
     tools:context=".activity.DrawTreeActivity">
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_height="30dp"
-        android:layout_width="60dp"
-        android:text="刷新"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-    <RelativeLayout
-        android:id="@+id/m_layout"
-        android:layout_width="400dp"
-        android:layout_height="600dp"
-        android:layout_centerInParent="true"
-        android:background="#01000000"/>
+        <View
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            />
+
+        <com.example.uimode.activity.tree.wight.ZoomScrollLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        <com.example.uimode.activity.tree.ui.FamilyTreeView
+            android:id="@+id/myview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        </com.example.uimode.activity.tree.wight.ZoomScrollLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
