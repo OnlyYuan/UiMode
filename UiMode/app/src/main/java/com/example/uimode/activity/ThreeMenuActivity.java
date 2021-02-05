@@ -26,5 +26,6 @@ public class ThreeMenuActivity extends AppCompatActivity {
 
         list.add(fragment1);
         list.add(fragment2);
+
     }
 }

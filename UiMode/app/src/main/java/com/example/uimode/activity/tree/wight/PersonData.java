@@ -22,7 +22,7 @@ public class PersonData {
     public String rank;
     public String children_gender;
     public int gender;
-
+    public int sex =1;
     public String relationship;
 
     public long fromId; // 本节点的来源id

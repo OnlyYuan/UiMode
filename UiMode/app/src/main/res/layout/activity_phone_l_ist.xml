@@ -5,17 +5,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".activity.PhoneLIstActivity">
+
+    <EditText
+        android:id="@+id/search_btn"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:drawableLeft="@mipmap/auth_search_icon_t"
+        android:paddingLeft="20dp"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:background="@drawable/auth_search_edittext_shape"
+        android:hint="搜索"
+        />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="通讯录"
         />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+        <com.example.uimode.wight.SideBarView
+            android:id="@+id/sideBar"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="@color/grey"
+            />
 
+    </RelativeLayout>
 </LinearLayout>

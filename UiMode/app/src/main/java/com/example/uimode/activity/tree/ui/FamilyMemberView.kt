@@ -83,8 +83,8 @@ class FamilyMemberView : CombinedBaseView {
                     .into(findViewById<LinearLayout>(R.id.spouseLayout).findViewById(R.id.ivHead))
 
                 findViewById<LinearLayout>(R.id.memberLayout).findViewById<TextView>(R.id.tvTitle).text = familyMemberModel!!.treeNodeEntity!!.name
-                Glide.with(context).load(familyMemberModel!!.borthers[0].treeNodeEntity.picUrlString).apply(manOptions)
-                    .into(findViewById<LinearLayout>(R.id.memberLayout).findViewById(R.id.ivHead))
+//                Glide.with(context).load(familyMemberModel!!.borthers[0].treeNodeEntity.picUrlString).apply(manOptions)
+//                    .into(findViewById<LinearLayout>(R.id.memberLayout).findViewById(R.id.ivHead))
             }
         } else {
             var l = x - FamilyTreeAdapter.itemWidth / 2

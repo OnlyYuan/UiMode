@@ -19,7 +19,8 @@
         <activity android:name=".activity.ThreeMenuActivity" />
 
         <activity android:name=".activity.CameraActivity" />
-        <activity android:name=".activity.DrawTreeActivity" />
+        <activity android:name=".activity.DrawTreeActivity"
+                    android:screenOrientation="landscape"/>
         <activity
             android:name=".activity.CombineActivity"
             android:screenOrientation="landscape"
