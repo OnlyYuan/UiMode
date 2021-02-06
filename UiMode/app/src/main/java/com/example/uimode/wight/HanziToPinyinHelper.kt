@@ -7,6 +7,7 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinToneType
 
 class HanziToPinyinHelper {
 
+    companion object {
     /**
      * 获取汉字的拼音
      */
@@ -24,6 +25,6 @@ class HanziToPinyinHelper {
 
         return pinyin
     }
-
+    }
 
 }

@@ -30,7 +30,7 @@ public class SideBarView extends View {
     private int mPaddingRight = 0;
     private float mTextSize = 15;
     private int mTextColor = Color.BLACK;
-    private int mItemSpace = 15;                //自定义的item间隔
+    private int mItemSpace = 5;                //自定义的item间隔
     private boolean mIsEqualItemSpace = true;   //是否按View的高度均分item的高度间隔
     private Paint mPaint;
     private int mWidth = 0;
@@ -47,6 +47,7 @@ public class SideBarView extends View {
     public SideBarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initPaint();
+
     }
 
     public SideBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {

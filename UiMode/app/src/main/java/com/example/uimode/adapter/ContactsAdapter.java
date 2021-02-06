@@ -11,17 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uimode.R;
+import com.example.uimode.mode.ContactEntity;
 import com.example.uimode.mode.PersonMsg;
 
 import java.util.ArrayList;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
     private  Context context;
-    private ArrayList<PersonMsg> personMsgs;
+    private ArrayList<ContactEntity> personMsgs;
     private String tips="";
     private int mPostion=0 ;
 
-    public ContactsAdapter(Context context, ArrayList<PersonMsg> personMsgs){
+    public ContactsAdapter(Context context, ArrayList<ContactEntity> personMsgs){
         this.context = context;
         this.personMsgs = personMsgs;
 
@@ -29,7 +30,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
 
     // 获取到数据进行更新
-    public void updateData(ArrayList<PersonMsg> persons) {
+    public void updateData(ArrayList<ContactEntity> persons) {
         personMsgs.clear();
         personMsgs.addAll(persons);
         notifyDataSetChanged(); //刷新
@@ -47,7 +48,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.name.setText(personMsgs.get(position).getName());
-        holder.phone.setText(personMsgs.get(position).getNum());
+        holder.phone.setText(personMsgs.get(position).getPhone());
 
         if (personMsgs.get(position).isFirst()){
             tips = personMsgs.get(position).getFirstWord();
