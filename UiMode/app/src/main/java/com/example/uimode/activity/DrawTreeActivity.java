@@ -2,9 +2,6 @@ package com.example.uimode.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -13,16 +10,9 @@ import com.example.uimode.activity.tree.mode.FamilyMemberModel;
 import com.example.uimode.activity.tree.mode.TreeNodeEntity;
 import com.example.uimode.activity.tree.ui.FamilyMemberLayout;
 import com.example.uimode.activity.tree.ui.FamilyTreeAdapter;
-import com.example.uimode.activity.tree.ui.FamilyTreeView;
-import com.example.uimode.mode.ChildTreeModeNode;
-import com.example.uimode.mode.TargetPostion;
-import com.example.uimode.mode.TreeModeNode;
 import com.example.uimode.mode.TreeModePostion;
-import com.example.uimode.wight.MyView;
-import com.example.uimode.wight.TreeHelper;
 import com.example.uimode.wight.TreeModeView;
 
-import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.List;
 

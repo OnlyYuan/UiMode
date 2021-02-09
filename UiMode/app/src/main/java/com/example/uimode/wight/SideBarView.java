@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -28,16 +29,19 @@ public class SideBarView extends View {
     private int mPaddingBottom = 0;
     private int mPaddingLeft = 0;
     private int mPaddingRight = 0;
-    private float mTextSize = 15;
-    private int mTextColor = Color.BLACK;
+    private float mTextSize = 35;
+    private int mTextColor = Color.GRAY;
+    private int mTextColor2 = Color.BLUE;
     private int mItemSpace = 5;                //自定义的item间隔
     private boolean mIsEqualItemSpace = true;   //是否按View的高度均分item的高度间隔
     private Paint mPaint;
+    private Paint mPaint2;
     private int mWidth = 0;
     private int mHeight = 0;
     private Point mOneItemPoint = new Point();  //第一个item的坐标值
     private int mItemHeightSize = 5;            //单个Item的高度尺寸
     private OnClickListener mListener;
+    private int mCount =0;
 
     public SideBarView(Context context) {
         super(context);
@@ -82,9 +86,12 @@ public class SideBarView extends View {
                 downPosition = Math.max(downPosition, 1);                       //不允许有小于1的值
                 downPosition = Math.min(downPosition, mContentDataList.size());//不允许有大于集合长度的值
                 downPosition = downPosition - 1;
+
                 if (mListener != null) {
                     mListener.onItemDown(downPosition, mContentDataList.get(downPosition));
                 }
+                mCount = downPosition;
+                postInvalidate();
                 return true;
             case MotionEvent.ACTION_MOVE:
                 int movePosition = Math.round(mContentDataList.size() / (itemAllHeight / event.getY()));
@@ -94,6 +101,8 @@ public class SideBarView extends View {
                 if (mListener != null) {
                     mListener.onItemMove(movePosition, mContentDataList.get(movePosition));
                 }
+                mCount = movePosition;
+                postInvalidate();
                 return true;
             case MotionEvent.ACTION_UP:
                 int upPosition = Math.round(mContentDataList.size() / (itemAllHeight / event.getY()));
@@ -114,6 +123,12 @@ public class SideBarView extends View {
         mPaint.setColor(mTextColor);
         mPaint.setTextSize(mTextSize);
         mPaint.setTextAlign(Paint.Align.CENTER);
+
+        mPaint2 = new Paint();
+        mPaint2.setAntiAlias(true);
+        mPaint2.setColor(mTextColor2);
+        mPaint2.setTextSize(mTextSize);
+        mPaint2.setTextAlign(Paint.Align.CENTER);
     }
 
     public void setContentDataList(List<String> list) {
@@ -199,8 +214,15 @@ public class SideBarView extends View {
                 canvas.drawText(itemContent, mOneItemPoint.x, mOneItemPoint.y, mPaint);
                 continue;
             }
+
             int y = mOneItemPoint.y + (mItemHeightSize * i);
-            canvas.drawText(itemContent, mOneItemPoint.x, y, mPaint);
+            if (i==mCount){
+                Log.i("3333","------------->qwqeq");
+                canvas.drawText(itemContent, mOneItemPoint.x, y, mPaint2);
+            }else {
+                canvas.drawText(itemContent, mOneItemPoint.x, y, mPaint);
+            }
+
         }
     }
 

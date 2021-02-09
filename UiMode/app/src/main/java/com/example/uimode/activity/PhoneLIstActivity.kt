@@ -148,7 +148,6 @@ class PhoneLIstActivity : AppCompatActivity() {
         sideBarView.setContentDataList(list)
         sideBarView.setEqualItemSpace(false)
         sideBarView.itemSpace(0)
-        sideBarView.setTextColor(resources.getColor(R.color.black))
         sideBarView.setOnClickListener(object : SideBarView.OnClickListener {
             override fun onItemDown(position: Int, itemContent: String?) {
 
@@ -267,7 +266,7 @@ class PhoneLIstActivity : AppCompatActivity() {
      * 输出读取的数据
      */
     private fun showMsg() {
-      //  lifecycleScope.launch(Dispatchers.IO){
+
             mContracts = getContacts()
             saveData(mContracts)
 
@@ -280,7 +279,7 @@ class PhoneLIstActivity : AppCompatActivity() {
             message.what = 1
             handler.sendMessage(message)
 
-       // }
+
     }
 
 

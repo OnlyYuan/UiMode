@@ -2,6 +2,7 @@ package com.example.uimode.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
@@ -14,19 +15,23 @@ import android.widget.ListView;
 
 import com.example.uimode.R;
 import com.example.uimode.adapter.MAdapter;
+import com.example.uimode.wight.CustomSDCardLoader;
 
-public class MainActivity extends AppCompatActivity {
+import skin.support.SkinCompatManager;
+
+public class MainActivity extends Activity {
 
 
     private ListView listView;
     private MAdapter mAdapter;
-    private String[] mtitile={"拖拉效果","缩放","拖拉添加","树形画图","完整效果","相机","三级菜单","获取通讯录"};
+    private String[] mtitile={"拖拉效果","缩放","拖拉添加","树形画图","完整效果","相机","三级菜单","获取通讯录","换肤green","换肤dark","默认主题","FlowLayout"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        SkinCompatManager.getInstance().loadSkin("night.skin", null, CustomSDCardLoader.SKIN_LOADER_STRATEGY_SDCARD);
     }
 
     private void init() {
@@ -64,6 +69,19 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this,PhoneLIstActivity.class));
                         break;
 
+                    case 8://green
+                        SkinCompatManager.getInstance().loadSkin("green.skin", null, CustomSDCardLoader.SKIN_LOADER_STRATEGY_SDCARD);
+                        break;
+                     case 9://dark
+                         SkinCompatManager.getInstance().loadSkin("dark.skin", null, CustomSDCardLoader.SKIN_LOADER_STRATEGY_SDCARD);
+                        break;
+                     case 10://默认
+                         SkinCompatManager.getInstance().loadSkin("default.skin", null, CustomSDCardLoader.SKIN_LOADER_STRATEGY_SDCARD);
+                        break;
+
+                    case 11://折叠式标题栏FlowLayoutActivity
+                        startActivity(new Intent(MainActivity.this,FlowLayoutActivity.class));
+                        break;
 
                 }
             }

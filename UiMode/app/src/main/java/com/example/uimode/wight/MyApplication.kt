@@ -8,8 +8,7 @@ import skin.support.constraint.app.SkinConstraintViewInflater
 import skin.support.design.app.SkinMaterialViewInflater
 
 
-class MyApplicition:Application() {
-
+class MyApplication:Application() {
 
     override fun onCreate() {
         super.onCreate()

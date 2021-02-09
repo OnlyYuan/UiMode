@@ -37,12 +37,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="31dp"/>
 
-        <com.example.uimode.wight.SideBarView
+    <com.example.uimode.wight.SideBarView
             android:id="@+id/sideBar"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:background="@color/grey"
+            android:layout_marginBottom="40dp"
+            android:paddingBottom="10dp"
             />
 
     </RelativeLayout>
