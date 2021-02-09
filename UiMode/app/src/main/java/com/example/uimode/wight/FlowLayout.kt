@@ -3,6 +3,9 @@ package com.example.uimode.wight
 import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.view.setPadding
+import com.example.uimode.R
 import com.example.uimode.mode.TargetPostion
 
 class FlowLayout : ViewGroup {
@@ -20,11 +23,12 @@ class FlowLayout : ViewGroup {
             measureChild(getChildAt(i),widthMeasureSpec,heightMeasureSpec)
     }
 
+
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
 
-        var left = 0
+        var left = 10
         var right = 0
-        var top = 0
+        var top = 10
         var maxWidth = r
 
         var count = childCount
@@ -35,15 +39,16 @@ class FlowLayout : ViewGroup {
                 var view = getChildAt(i)
                 right = left + view.measuredWidth
                 if (right > maxWidth) {//超过当前行
-                    left = 0
+                    //距离左边的距离
+                    left = 10
                    // right = left + view.measuredWidth
-                    top += view.measuredHeight
+                    top += view.measuredHeight +10
                 }
 
                 right = left + view.measuredWidth
 
                 getChildAt(i).layout(left, top, right, top + view.measuredHeight)
-                left += view.measuredWidth+20
+                left += (view.measuredWidth+20)
 
             }
         }
@@ -54,10 +59,21 @@ class FlowLayout : ViewGroup {
      */
      fun showUI(list: ArrayList<String>){
         for (i in 0 until list.size-1){
-            var textView = TreeModeView(context)
-            textView.setNameView(list[i])
+            var textView = TextView(context)
+            textView.setText(list[i])
+            textView.setTextColor(resources.getColor(R.color.text_color))
+            textView.setPadding(15,10,15,10)
+            textView.background=resources.getDrawable(R.drawable.flowlayout_textview_selector)
             addView(textView)
+            var mStatus = false
             textView.setOnClickListener {
+                mStatus=!mStatus
+                textView.isSelected = mStatus
+                if (mStatus){
+                    textView.setTextColor(resources.getColor(R.color.green_2))
+                }else{
+                    textView.setTextColor(resources.getColor(R.color.text_color))
+                }
                 listener.onClick(i)
             }
         }
@@ -75,7 +91,7 @@ class FlowLayout : ViewGroup {
     /**
      * 暴露点击函数
      */
-    public fun setOnChildItemListener(listener:OnChildItemListener){
+    fun setOnChildItemListener(listener:OnChildItemListener){
 
         this.listener =listener
 

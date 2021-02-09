@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 
     private ListView listView;
     private MAdapter mAdapter;
-    private String[] mtitile={"拖拉效果","缩放","拖拉添加","树形画图","完整效果","相机","三级菜单","获取通讯录","换肤green","换肤dark","默认主题","FlowLayout"};
+    private String[] mtitile={"拖拉效果","缩放","拖拉添加","树形画图","完整效果","相机","三级菜单","获取通讯录","换肤green","换肤dark","默认主题","FlowLayout","时间选择器"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
