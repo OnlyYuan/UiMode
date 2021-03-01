@@ -23,7 +23,6 @@ public class ThreeMenuActivity extends AppCompatActivity {
         Fragment1 fragment1 = new Fragment1();
         Fragment2 fragment2 = new Fragment2();
 
-
         list.add(fragment1);
         list.add(fragment2);
 

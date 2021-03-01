@@ -16,7 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.DataPickerActivity"></activity>
+        <activity android:name=".activity.NetTestActivity"></activity>
+        <activity android:name=".activity.TreeActivity" />
+        <activity android:name=".activity.TimeActivity" />
+        <activity android:name=".activity.DataPickerActivity" />
         <activity android:name=".activity.FlowLayoutActivity" />
         <activity
             android:name=".ui.login.LoginActivity"

@@ -123,7 +123,7 @@ class FamilyMemberLayout : ViewGroup {
     }
 
     fun getRightBorder(): Int {
-        return (familyTreeAdapter!!.right + 4) * (FamilyTreeAdapter.itemWidth + FamilyTreeAdapter.colSpace) / 2
+        return (familyTreeAdapter!!.right + 8) * (FamilyTreeAdapter.itemWidth + FamilyTreeAdapter.colSpace) / 2
     }
 
     fun getBottomBorder(): Int {

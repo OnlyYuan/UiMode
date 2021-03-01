@@ -1,6 +1,6 @@
 package com.example.uimode.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -22,7 +22,7 @@ import kotlin.jvm.functions.Function0;
 /**
  * 画树形
  */
-public class DrawTreeActivity extends AppCompatActivity  {
+public class DrawTreeActivity extends Activity {
 
     LinearLayout.LayoutParams[] layoutParams = new LinearLayout.LayoutParams[3];
     private TreeModeView[] treeModeView= new TreeModeView[3];
@@ -68,14 +68,7 @@ public class DrawTreeActivity extends AppCompatActivity  {
     public void initView(){
 
         familyMemberLayout = findViewById(R.id.myview);
-
-
         familyMemberLayout.setFamilyTreeAdapter(new FamilyTreeAdapter());
-
-
-
-
-
     }
 
     private void initLinsner() {
@@ -84,6 +77,18 @@ public class DrawTreeActivity extends AppCompatActivity  {
 
     //初始化节点
     private void initData() {
+        String [] botherList = {"兄弟1","xiongdi2","xiongdi2","xiongdi2"};
+        List<FamilyMemberModel> bothers = new ArrayList<FamilyMemberModel>();
+        FamilyMemberModel mBother;
+        for (int i=2; i<botherList.length;i++){
+            mBother = new FamilyMemberModel();
+            TreeNodeEntity treeNodeEntity0 = new TreeNodeEntity();
+            treeNodeEntity0.setName(botherList[i]);
+            mBother.setTreeNodeEntity(treeNodeEntity0);
+            bothers.add(mBother);
+        }
+
+
         familyMemberModel  = new FamilyMemberModel();
         TreeNodeEntity treeNodeEntity1 = new TreeNodeEntity();
         treeNodeEntity1.setName("团队一");
@@ -93,8 +98,8 @@ public class DrawTreeActivity extends AppCompatActivity  {
 
         familyMemberModel.level =0;
 
-        String [] twoNodes ={"张三","李四","王五"};
-        String [] [] twoNodes2 ={{"张三1","李四1","王五2"},{"张三2","李四2","王五2"},{"张三3","李四3","王五3"}};
+        String [] twoNodes ={"张三","李四","王五","狗蛋","麻子"};
+        String [] [] twoNodes2 ={{"张三1","李四1","王五1"},{"王五2","李四2","王五2","niuniu"},{"张三3","李四3"},{"张三4","李四4"},{"张三5","李四5"}};
 
         //初始化数组
         List<FamilyMemberModel> chlidList1 = new ArrayList<FamilyMemberModel>();
@@ -105,6 +110,9 @@ public class DrawTreeActivity extends AppCompatActivity  {
             treeNodeEntity2 = new TreeNodeEntity();
             treeNodeEntity2.setName(twoNodes[i]);
             treeNodeEntity2.setPicUrlString("");
+            if (i==2){
+                childTreeModeNode.setBother(bothers);
+            }
             childTreeModeNode.setLevel(2);
             childTreeModeNode.setTreeNodeEntity(treeNodeEntity2);
 
