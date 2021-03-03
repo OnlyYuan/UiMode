@@ -17,13 +17,11 @@ public class ChildTreeModeNode {
     //兄弟
     private List<TreeBotherMode > botherList = new ArrayList<TreeBotherMode >();
 
-
     //孩子节点
     private List<ChildTreeModeNode> childNodeList = new ArrayList<ChildTreeModeNode>();
 
     //层级
     private int mCount;
-
 
 
     public String getName() {

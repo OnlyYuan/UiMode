@@ -9,12 +9,15 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.uimode.R
 import com.example.uimode.activity.tree.ui.FamilyMemberView
+import com.example.uimode.mode.treemode.TreeNode
 
 class TreeView : ViewGroup {
     //treeView的宽高
     private var viewWidth =0
     private var viewHeight =0
-
+    var mNodeList:MutableList<TreeNode> = ArrayList()
+    //屏幕最大宽度
+    private var viewMaxWidth =0
 
     constructor(context: Context):super(context)
 
@@ -35,12 +38,9 @@ class TreeView : ViewGroup {
         for (i in 0 until count) {
             measureChild(getChildAt(i), widthMeasureSpec, heightMeasureSpec)
         }
-        //先用view的宽高来代替
-//        viewWidth = widthMeasureSpec
-//        viewHeight = heightMeasureSpec
-        Log.i("11","宽：$viewWidth 高：$viewHeight")
-        //设置view的大小
-        setMeasuredDimension(widthMeasureSpec,heightMeasureSpec)
+
+        Log.i("11","屏幕的宽度$viewMaxWidth")
+        setMeasuredDimension(widthMeasureSpec, heightMeasureSpec)
     }
 
 
@@ -52,10 +52,15 @@ class TreeView : ViewGroup {
         var bottom = 0
 
         for (i in 0 until childCount){
-            left = r/2 - getChildAt(i).measuredWidth/2
-            right = r/2 + getChildAt(i).measuredWidth/2
-            top = 10
-            bottom = top + getChildAt(i).measuredHeight
+
+            left = mNodeList[i].point.x - getChildAt(i).measuredWidth
+            right = mNodeList[i].point.x
+            top = mNodeList[i].point.y - (getChildAt(i).measuredHeight+30)
+            bottom = mNodeList[i].point.y
+
+            if (viewMaxWidth<right) {
+                viewMaxWidth = right
+            }
             (getChildAt(i) as MPersonView).layout(left,top,right,bottom)
         }
     }
@@ -63,18 +68,22 @@ class TreeView : ViewGroup {
     /**
      * 添加view
      */
-    fun showUI(list: ArrayList<String>){
+   // fun showUI(list: ArrayList<String>){
+    fun showUI(nodeList:MutableList<TreeNode>){
+        mNodeList.clear()
+        mNodeList.addAll(nodeList)
         //清屏
         removeAllViews()
-        for (i in 0 until list.size){
+        for (i in 0 until nodeList.size){
 
             var view=MPersonView (context)
-            view.setText(list[0])
+            view.setText(nodeList[i].name)
             addView(view)
         }
         //postInvalidate()
         requestLayout()
     }
+
 
 
 }
