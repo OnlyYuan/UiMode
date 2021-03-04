@@ -1,6 +1,8 @@
 package com.example.uimode.wight
 
 import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -10,6 +12,7 @@ import android.widget.TextView
 import com.example.uimode.R
 import com.example.uimode.activity.tree.ui.FamilyMemberView
 import com.example.uimode.mode.treemode.TreeNode
+import com.wanggang.familytree.dp
 
 class TreeView : ViewGroup {
     //treeView的宽高
@@ -18,16 +21,32 @@ class TreeView : ViewGroup {
     var mNodeList:MutableList<TreeNode> = ArrayList()
     //屏幕最大宽度
     private var viewMaxWidth =0
+    var paint:Paint = Paint()
 
-    constructor(context: Context):super(context)
+    constructor(context: Context):super(context){
+        init()
+    }
 
-    constructor(context: Context,attributeSet: AttributeSet):super(context,attributeSet)
+    constructor(context: Context,attributeSet: AttributeSet):super(context,attributeSet){
+        init()
+    }
 
     constructor(context: Context, attributeSet: AttributeSet, defStyleAttr: Int) : super(
             context,
             attributeSet,
             defStyleAttr
-    )
+    ){
+        init()
+    }
+
+
+    private fun init(){
+        paint.style = Paint.Style.STROKE
+        paint.strokeWidth = 1f.dp
+        paint.color = resources.getColor(R.color.black)
+        paint.isAntiAlias = true
+        setWillNotDraw(false);
+    }
 
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -62,6 +81,7 @@ class TreeView : ViewGroup {
                 viewMaxWidth = right
             }
             (getChildAt(i) as MPersonView).layout(left,top,right,bottom)
+
         }
     }
 
@@ -78,12 +98,41 @@ class TreeView : ViewGroup {
 
             var view=MPersonView (context)
             view.setText(nodeList[i].name)
+            view.setOnClickListener(v->{
+
+            })
             addView(view)
         }
-        //postInvalidate()
-        requestLayout()
+        postInvalidate()
+
+       //requestLayout()
     }
 
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+        Log.i("11","--->执行了ondraw")
+        drawLine( canvas,paint,mNodeList[mNodeList.size-1]);
+        //Log.i("11","--->${mNodeList[mNodeList.size-1]}")
+    }
 
+    /**
+     * 画线
+     */
+    private fun drawLine(mCanvas: Canvas?,mPaint: Paint,treeNode: TreeNode?){
+        treeNode?.let {
+
+            if (treeNode.children.size>0){
+                for (element in treeNode.children) {
+                    mCanvas?.drawLine((treeNode.point.x).toFloat() - getChildAt(0).measuredWidth/2-10,
+                            (treeNode.point.y).toFloat(),
+                            (element.point.x).toFloat() - getChildAt(0).measuredWidth/2,
+                            (element.point.y).toFloat() - getChildAt(0).measuredHeight-30,
+                            paint)
+                    drawLine(mCanvas, mPaint, element)
+                }
+            }
+        }
+
+    }
 
 }
