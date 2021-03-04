@@ -21,7 +21,7 @@ package com.example.uimode.mode.treemode
      var level:Int = 0
 
     //当前层级的编号
-     var levelNum = 0
+     var levelNum = "0"
 
     //节点
      var point = TreePoint()

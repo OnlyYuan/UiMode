@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.example.uimode.R
 import com.example.uimode.activity.tree.ui.FamilyMemberView
 import com.example.uimode.mode.treemode.TreeNode
@@ -98,9 +99,10 @@ class TreeView : ViewGroup {
 
             var view=MPersonView (context)
             view.setText(nodeList[i].name)
-            view.setOnClickListener(v->{
-
-            })
+            view.setOnClickListener {
+                Log.i("11","-->level =${nodeList[i].level} levelNum = ${nodeList[i].levelNum}")
+                Toast.makeText(context,"-->level =${nodeList[i].level} levelNum = ${nodeList[i].levelNum}",Toast.LENGTH_SHORT).show()
+            }
             addView(view)
         }
         postInvalidate()
@@ -115,7 +117,7 @@ class TreeView : ViewGroup {
         //Log.i("11","--->${mNodeList[mNodeList.size-1]}")
     }
 
-    /**
+    /**`
      * 画线
      */
     private fun drawLine(mCanvas: Canvas?,mPaint: Paint,treeNode: TreeNode?){
@@ -124,7 +126,7 @@ class TreeView : ViewGroup {
             if (treeNode.children.size>0){
                 for (element in treeNode.children) {
                     mCanvas?.drawLine((treeNode.point.x).toFloat() - getChildAt(0).measuredWidth/2-10,
-                            (treeNode.point.y).toFloat(),
+                            (treeNode.point.y).toFloat()-30,
                             (element.point.x).toFloat() - getChildAt(0).measuredWidth/2,
                             (element.point.y).toFloat() - getChildAt(0).measuredHeight-30,
                             paint)

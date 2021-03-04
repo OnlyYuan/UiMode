@@ -39,16 +39,18 @@ class TreeActivity : AppCompatActivity() {
     private fun initData() {
         treeNode = TreeNode()
         treeNode.name = "团队1"
-        treeNode.level = 1
-
+        treeNode.level = 0
+        treeNode.levelNum = "0"
         for (i in twoNodes.indices) {
             var childNode = TreeNode()
-            childNode.level = 2
+            childNode.level = 1
+            childNode.levelNum = "$i"
             childNode.name = twoNodes[i]
-            for (element in twoNodes2[i]) {
+            for (j in twoNodes2[i].indices) {
                 var mChildNode = TreeNode()
-                mChildNode.level = 3
-                mChildNode.name = element
+                mChildNode.level = 2
+                mChildNode.levelNum = "$i、$j"
+                mChildNode.name = twoNodes2[i][j]
                 childNode.children.add(mChildNode)
             }
 
@@ -74,12 +76,12 @@ class TreeActivity : AppCompatActivity() {
             }
             var minX = treeNode.children[0].point.x
             treeNode.point.x = (minX + maxX+40)/2
-            treeNode.point.y = treeNode.level * nodeHeight
+            treeNode.point.y = (treeNode.level+1) * nodeHeight
             nodeList.add(treeNode)
         }else{
             drawMinX += nodeWidth
             treeNode.point.x = drawMinX
-            treeNode.point.y = treeNode.level*nodeHeight
+            treeNode.point.y = (treeNode.level+1)*nodeHeight
             nodeList.add(treeNode)
         }
 
