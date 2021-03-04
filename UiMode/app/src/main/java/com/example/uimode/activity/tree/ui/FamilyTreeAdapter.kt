@@ -21,6 +21,12 @@ class FamilyTreeAdapter {
         val lineSpace = 40.dp
         val colSpace = 40.dp
         val radius = 6.dp
+//
+//        val itemWidth = 60.dp
+//        val itemHeight = 80.dp
+//        val lineSpace = 40.dp
+//        val colSpace = 40.dp
+//        val radius = 6.dp
     }
 
     // 保存所有节点数据
@@ -86,15 +92,17 @@ class FamilyTreeAdapter {
         addToList(familyMemberModel)
         familyMemberModel.centerPoint = TreePoint(0, firstLevel - familyMemberModel.level)
 
-        if (familyMemberModel.treeNodeEntity != null) {
+        if (familyMemberModel.bothers != null&&familyMemberModel.bother.size>0) {
+            var count = familyMemberModel.bother.size
             familyMemberModel.centerPoint!!.hasSpouseNode = true
             familyMemberModel.centerPoint!!.connectType = familyMemberModel.treeNodeEntity.sex
-            boardMap?.put(familyMemberModel.level, LeftRightBoard(-1, 1))
+            familyMemberModel.centerPoint!!.botherNum = count
+            boardMap?.put(familyMemberModel.level, LeftRightBoard(-count, count))
             if (left > -1) {
-                left = -1
+                left = -count
             }
             if (right < 1) {
-                right = 1
+                right += count
             }
         } else {
             familyMemberModel.centerPoint!!.hasSpouseNode = false
@@ -136,9 +144,9 @@ class FamilyTreeAdapter {
             if (childModel.childs != null) {
                 childModel.centerPoint!!.hasSpouseNode = true
                 childModel.centerPoint!!.connectType = childModel.treeNodeEntity.sex
-                board.left--
+                board.left -=  childModel.centerPoint.botherNum
                 childModel.centerPoint!!.coordinateX = board.left
-                board.left--
+                board.left-=childModel.centerPoint.botherNum
             } else {
                 childModel.centerPoint!!.hasSpouseNode = false
             }
@@ -177,7 +185,7 @@ class FamilyTreeAdapter {
             if (childModel.childs != null) {
                 childModel.centerPoint!!.hasSpouseNode = true
                 childModel.centerPoint!!.connectType = childModel.treeNodeEntity.sex
-                board.left--
+                board.left-=childModel.centerPoint.botherNum
             } else {
                 childModel.centerPoint!!.hasSpouseNode = false
             }
@@ -214,7 +222,7 @@ class FamilyTreeAdapter {
             if (childModel.childs != null) {
                 childModel.centerPoint!!.hasSpouseNode = true
                 childModel.centerPoint!!.connectType = childModel.treeNodeEntity.sex
-                board.right++
+                board.right+=childModel.centerPoint.botherNum
                 childModel.centerPoint!!.coordinateX = board.right
                 board.right++
             } else {
@@ -256,7 +264,7 @@ class FamilyTreeAdapter {
             if (childModel.childs != null) {
                 childModel.centerPoint!!.hasSpouseNode = true
                 childModel.centerPoint!!.connectType = childModel.treeNodeEntity.sex
-                board.right++
+                board.right+=childModel.centerPoint.botherNum
             } else {
                 childModel.centerPoint!!.hasSpouseNode = false
             }

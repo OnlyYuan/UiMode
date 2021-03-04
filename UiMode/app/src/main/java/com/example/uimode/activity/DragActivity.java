@@ -53,6 +53,7 @@ public class DragActivity extends AppCompatActivity implements View.OnTouchListe
         relativeLayout =  findViewById(R.id.layout);
         recyclerView = findViewById(R.id.listview);
 
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         DragAdapter adapter = new DragAdapter(this,mPics);

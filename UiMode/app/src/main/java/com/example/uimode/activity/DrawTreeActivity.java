@@ -1,36 +1,28 @@
 package com.example.uimode.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import com.example.uimode.R;
 import com.example.uimode.activity.tree.mode.FamilyMemberModel;
+import com.example.uimode.activity.tree.mode.TreeNodeEntity;
 import com.example.uimode.activity.tree.ui.FamilyMemberLayout;
 import com.example.uimode.activity.tree.ui.FamilyTreeAdapter;
-import com.example.uimode.activity.tree.ui.FamilyTreeView;
-import com.example.uimode.mode.ChildTreeModeNode;
-import com.example.uimode.mode.TargetPostion;
-import com.example.uimode.mode.TreeModeNode;
 import com.example.uimode.mode.TreeModePostion;
-import com.example.uimode.wight.MyView;
-import com.example.uimode.wight.TreeHelper;
 import com.example.uimode.wight.TreeModeView;
 
-import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.List;
 
+import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
 /**
  * 画树形
  */
-public class DrawTreeActivity extends AppCompatActivity  {
+public class DrawTreeActivity extends Activity {
 
     LinearLayout.LayoutParams[] layoutParams = new LinearLayout.LayoutParams[3];
     private TreeModeView[] treeModeView= new TreeModeView[3];
@@ -65,25 +57,18 @@ public class DrawTreeActivity extends AppCompatActivity  {
         Function0 function0 = null;
 
 
-        familyTreeAdapter.dealWithData(familyMemberModel,function0){
-
+        familyTreeAdapter.dealWithData(familyMemberModel,()->{
             /************** 刷新显示 ***********************/
             familyMemberLayout.displayUI();
-        };
+            return Unit.INSTANCE;
+        });
     }
 
 
     public void initView(){
 
         familyMemberLayout = findViewById(R.id.myview);
-
-
         familyMemberLayout.setFamilyTreeAdapter(new FamilyTreeAdapter());
-
-
-
-
-
     }
 
     private void initLinsner() {
@@ -92,28 +77,52 @@ public class DrawTreeActivity extends AppCompatActivity  {
 
     //初始化节点
     private void initData() {
+        String [] botherList = {"兄弟1","xiongdi2","xiongdi2","xiongdi2"};
+        List<FamilyMemberModel> bothers = new ArrayList<FamilyMemberModel>();
+        FamilyMemberModel mBother;
+        for (int i=2; i<botherList.length;i++){
+            mBother = new FamilyMemberModel();
+            TreeNodeEntity treeNodeEntity0 = new TreeNodeEntity();
+            treeNodeEntity0.setName(botherList[i]);
+            mBother.setTreeNodeEntity(treeNodeEntity0);
+            bothers.add(mBother);
+        }
+
+
         familyMemberModel  = new FamilyMemberModel();
-        familyMemberModel.treeNodeEntity.setName("团队一");
+        TreeNodeEntity treeNodeEntity1 = new TreeNodeEntity();
+        treeNodeEntity1.setName("团队一");
+        treeNodeEntity1.setPicUrlString(" ");
+        familyMemberModel.setTreeNodeEntity(treeNodeEntity1);
        // familyMemberModel.treeNodeEntity.setPicUrlString("");
 
         familyMemberModel.level =0;
 
-        String [] twoNodes ={"张三","李四","王五"};
-        String [] [] twoNodes2 ={{"张三1","李四1","王五2"},{"张三2","李四2","王五2"},{"张三3","李四3","王五3"}};
+        String [] twoNodes ={"张三","李四","王五","狗蛋","麻子"};
+        String [] [] twoNodes2 ={{"张三1","李四1","王五1"},{"王五2","李四2","王五2","niuniu"},{"张三3","李四3"},{"张三4","李四4"},{"张三5","李四5"}};
 
         //初始化数组
         List<FamilyMemberModel> chlidList1 = new ArrayList<FamilyMemberModel>();
+        TreeNodeEntity treeNodeEntity2 = new TreeNodeEntity();
         for (int i=0;i<twoNodes.length;i++){//第二层 子节点
 
             FamilyMemberModel childTreeModeNode = new FamilyMemberModel();
-
-            childTreeModeNode.setLevel(i+1);
-            childTreeModeNode.treeNodeEntity.setName(twoNodes[i]);
+            treeNodeEntity2 = new TreeNodeEntity();
+            treeNodeEntity2.setName(twoNodes[i]);
+            treeNodeEntity2.setPicUrlString("");
+            if (i==2){
+                childTreeModeNode.setBother(bothers);
+            }
+            childTreeModeNode.setLevel(2);
+            childTreeModeNode.setTreeNodeEntity(treeNodeEntity2);
 
             List<FamilyMemberModel> chlidList = new ArrayList<FamilyMemberModel>();
             for (int j=0;j<twoNodes2[i].length;j++){//第三层节点
                 FamilyMemberModel mChildTreeModeNode = new FamilyMemberModel();
-                mChildTreeModeNode.treeNodeEntity.setName(twoNodes2[i][j]);
+                TreeNodeEntity treeNodeEntity3 = new TreeNodeEntity();
+                treeNodeEntity3.setName(twoNodes2[i][j]);
+                treeNodeEntity3.setPicUrlString("");
+                mChildTreeModeNode.setTreeNodeEntity(treeNodeEntity3);
                 mChildTreeModeNode.setLevel(3);
                 chlidList.add(mChildTreeModeNode);
             }

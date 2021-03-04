@@ -10,10 +10,10 @@ class TreePoint(var coordinateX: Int, var coordinateY: Int) {
     var screenX = 0
     var screenY = 0
 
-    // 配偶屏幕坐标系坐标（当有配偶时有效）
+    // 配偶屏幕坐标系坐标（当有配偶时有效）兄弟
     var spouseScreenX = 0
 
-    // 是否包含配偶节点
+    // 是否包含配偶节点（兄弟节点，由1变多）
     var hasSpouseNode = false
 
     /**
@@ -29,13 +29,15 @@ class TreePoint(var coordinateX: Int, var coordinateY: Int) {
     // 父亲节点的位置信息
     var parentPoint: TreePoint? = null
 
-
+    //所属兄弟节点个数
+    var botherNum = 0
 
     /**
      * 计算当前节点屏幕坐标
      * */
     fun calculateCoord(itemWidth: Int, itemHeight: Int, lineSpace: Int, colSpace: Int, left: Int, top: Int) {
-        screenX = (coordinateX - left + 4) * (itemWidth + colSpace) / 2
+
+        screenX = (coordinateX - left + 4) * (itemWidth + colSpace)*(botherNum+1) / 2
         screenY = (- coordinateY - top + 4) * (itemHeight + lineSpace)
     }
 

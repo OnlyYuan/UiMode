@@ -36,4 +36,12 @@ import android.os.Parcelable
              field =value
          }
 
+     //是否是第一个字母
+     var isFirst:Boolean =false
+         get() {
+             return field
+         }
+         set(value) {
+             field =value
+         }
 }

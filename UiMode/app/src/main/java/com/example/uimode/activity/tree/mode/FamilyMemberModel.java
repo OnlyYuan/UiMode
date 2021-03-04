@@ -14,10 +14,17 @@ public class FamilyMemberModel {
     public List<FamilyMemberModel> childs;
 
     //兄弟节点
-    public List<FamilyMemberModel> borthers;
+    public List<FamilyMemberModel> bothers;
 
     //所属层次
     public  int  level =0;
+
+    //所属兄弟组
+    public  int  botherGroup =0;
+
+
+    //所属兄弟节点个数
+    public  int  botherNum =0;
 
     // 显示位置的中心点坐标
     public TreePoint centerPoint = null;
@@ -39,12 +46,12 @@ public class FamilyMemberModel {
         this.childs = childs;
     }
 
-    public List<FamilyMemberModel> getBorther() {
-        return borthers;
+    public List<FamilyMemberModel> getBother() {
+        return bothers;
     }
 
-    public void setBorther(List<FamilyMemberModel> borthers) {
-        this.borthers = borthers;
+    public void setBother(List<FamilyMemberModel> bothers) {
+        this.bothers = bothers;
     }
 
     public int getLevel() {
@@ -62,6 +69,28 @@ public class FamilyMemberModel {
     public void setCenterPoint(TreePoint centerPoint) {
         this.centerPoint = centerPoint;
     }
+    public List<FamilyMemberModel> getBothers() {
+        return bothers;
+    }
 
+    public void setBothers(List<FamilyMemberModel> bothers) {
+        this.bothers = bothers;
+    }
+
+    public int getBotherGroup() {
+        return botherGroup;
+    }
+
+    public void setBotherGroup(int botherGroup) {
+        this.botherGroup = botherGroup;
+    }
+
+    public int getBotherNum() {
+        return botherNum;
+    }
+
+    public void setBotherNum(int botherNum) {
+        this.botherNum = botherNum;
+    }
 }
 

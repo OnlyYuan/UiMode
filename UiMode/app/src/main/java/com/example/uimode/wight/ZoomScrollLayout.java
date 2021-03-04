@@ -66,7 +66,6 @@ public class ZoomScrollLayout extends RelativeLayout implements ScaleGestureDete
 
 //        mChildView.layout( mChildView.getLeftBorder() + centerX, ((FamilyMemberLayout) mChildView).getTopBorder() + DensityUtil.dip2px(getContext(), 64),
 //                ((FamilyMemberLayout) mChildView).getRightBorder() + centerX, ((FamilyMemberLayout) mChildView).getBottomBorder() + DensityUtil.dip2px(getContext(), 64));
-
     }
 
     public void init(Context context) {

@@ -50,11 +50,15 @@ class FamilyMemberView : CombinedBaseView {
         var y = familyMemberModel!!.centerPoint!!.screenY
         var t = y - FamilyTreeAdapter.itemHeight / 2
         var b = y + FamilyTreeAdapter.itemHeight / 2
+        var count = familyMemberModel!!.centerPoint.botherNum
         if (familyMemberModel!!.centerPoint!!.hasSpouseNode) {
 
-            var l = x - FamilyTreeAdapter.itemWidth - FamilyTreeAdapter.colSpace / 2
-            var r = x + FamilyTreeAdapter.itemWidth + FamilyTreeAdapter.colSpace / 2
+            var l = x - (FamilyTreeAdapter.itemWidth - FamilyTreeAdapter.colSpace / 2)*(count+1)
+            var r = x + (FamilyTreeAdapter.itemWidth + FamilyTreeAdapter.colSpace / 2)*(count+1)
 
+
+//            var l = x - FamilyTreeAdapter.itemWidth / 2
+//            var r = x + FamilyTreeAdapter.itemWidth / 2
             layout(l, t, r, b)
 
             val manOptions = RequestOptions()
@@ -75,7 +79,7 @@ class FamilyMemberView : CombinedBaseView {
                     .into(findViewById<LinearLayout>(R.id.memberLayout).findViewById(R.id.ivHead))
 
                 findViewById<LinearLayout>(R.id.spouseLayout).findViewById<TextView>(R.id.tvTitle).text = familyMemberModel!!.treeNodeEntity!!.name
-                Glide.with(context).load(familyMemberModel!!.borthers[0].treeNodeEntity.picUrlString).apply(womanOptions)
+                Glide.with(context).load(familyMemberModel!!.bothers[0].treeNodeEntity.picUrlString).apply(womanOptions)
                     .into(findViewById<LinearLayout>(R.id.spouseLayout).findViewById(R.id.ivHead))
             } else {
                 findViewById<LinearLayout>(R.id.spouseLayout).findViewById<TextView>(R.id.tvTitle).text = familyMemberModel!!.treeNodeEntity.name
@@ -83,8 +87,8 @@ class FamilyMemberView : CombinedBaseView {
                     .into(findViewById<LinearLayout>(R.id.spouseLayout).findViewById(R.id.ivHead))
 
                 findViewById<LinearLayout>(R.id.memberLayout).findViewById<TextView>(R.id.tvTitle).text = familyMemberModel!!.treeNodeEntity!!.name
-                Glide.with(context).load(familyMemberModel!!.borthers[0].treeNodeEntity.picUrlString).apply(manOptions)
-                    .into(findViewById<LinearLayout>(R.id.memberLayout).findViewById(R.id.ivHead))
+//                Glide.with(context).load(familyMemberModel!!.borthers[0].treeNodeEntity.picUrlString).apply(manOptions)
+//                    .into(findViewById<LinearLayout>(R.id.memberLayout).findViewById(R.id.ivHead))
             }
         } else {
             var l = x - FamilyTreeAdapter.itemWidth / 2

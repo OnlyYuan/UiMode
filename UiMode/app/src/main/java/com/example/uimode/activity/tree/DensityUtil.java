@@ -6,10 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v4.util.LruCache;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.LruCache;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public class DensityUtil {
 
