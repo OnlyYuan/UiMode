@@ -71,42 +71,44 @@ class TreeView : ViewGroup {
 
             left = groupNodeList[i].treeGroupPoint.x - getChildAt(i).measuredWidth
             right = groupNodeList[i].treeGroupPoint.x
-            top = groupNodeList[i].treeGroupPoint.y - (getChildAt(i).measuredHeight+30)
+            top = groupNodeList[i].treeGroupPoint.y - (getChildAt(i).measuredHeight+15.dp)
             bottom = groupNodeList[i].treeGroupPoint.y
 
             if (viewMaxWidth<right) {
                 viewMaxWidth = right
             }
-          //  (getChildAt(i) as MPersonView).layout(left,top,right,bottom)
-            (getChildAt(i) as GroupLayoutView).layout(left,top,right,bottom)
+
+           (getChildAt(i) as GroupLayoutView).layout(left,top,right,bottom)
 
         }
+        Log.i("11"," childcount------->")
     }
 
     /**
      * 添加view
      */
    // fun showUI(list: ArrayList<String>){
-    fun showUI(groupNodeList: MutableList<TreeGroupNode>){
+    fun showUI(mGroupNodeList: MutableList<TreeGroupNode>){
         groupNodeList.clear()
-        groupNodeList.addAll(groupNodeList)
+        groupNodeList.addAll(mGroupNodeList)
         //清屏
         removeAllViews()
+        Log.i("11","------->xunhuan的大小${mGroupNodeList.size} ")
         for (i in 0 until groupNodeList.size){
 
             var view = GroupLayoutView(context)
-            view.setView()
+            view.setView(groupNodeList[i])
             addView(view)
         }
         postInvalidate()
 
-       //requestLayout()
+      // requestLayout()
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         Log.i("11","--->执行了ondraw")
-        //drawLine( canvas,paint,groupNodeList[groupNodeList.size-1]);
+        drawLine( canvas,paint,groupNodeList[groupNodeList.size-1]);
     }
 
     /**`
