@@ -33,6 +33,10 @@ class TreeActivity : AppCompatActivity() {
         initData()
         groupNodeList.clear()
         setCoordinate(treeGroupNode)
+        for (element in groupNodeList){
+
+            Log.i("11"," x = ${element.treeGroupPoint.x}  y = ${element.treeGroupPoint.y}")
+        }
 
         treeView = findViewById<TreeView>(R.id.treeView)
         treeView.showUI(groupNodeList)
@@ -111,11 +115,11 @@ class TreeActivity : AppCompatActivity() {
 //
 //    }
 
-    private val nodeWidth = 40.dp
-    private val nodeHeight = 60.dp
+    private val nodeWidth = 40
+    private val nodeHeight = 60
     //加号的所占的宽度
-    private val cWidth = 40.dp
-    private val nodeSpace = 10.dp
+    private val cWidth = 40
+    private val nodeSpace = 10
     var drawMinX = 0
     //单个叶子group的宽
     var cMaxX = 0
@@ -139,19 +143,17 @@ class TreeActivity : AppCompatActivity() {
             var minX = treeGroupNode.groupNodeChildren[0].treeGroupPoint.x
 
             //记录当前group的坐标（x,y） x的值为最右边的值，y为底部y
-            treeGroupNode.treeGroupPoint.x = (minX + maxX + 20.dp) / 2
-            treeGroupNode.treeGroupPoint.y = (treeGroupNode.groupLevel + 10.dp) * nodeHeight
+            treeGroupNode.treeGroupPoint.x = (minX + maxX + 20) / 2
+            treeGroupNode.treeGroupPoint.y = (treeGroupNode.groupLevel + 10) * nodeHeight
             groupNodeList.add(treeGroupNode)
 
-            Log.i("11","-->x = ${ treeGroupNode.treeGroupPoint.x}  -->y = ${treeGroupNode.treeGroupPoint.y}")
         } else {
             //计算单个叶子group 的宽度
-            cMaxX = cWidth + (nodeWidth +10.dp)*treeGroupNode.treeNodeList.size
+            cMaxX = cWidth + (nodeWidth +10)*treeGroupNode.treeNodeList.size
             drawMinX += cMaxX + nodeSpace
             treeGroupNode.treeGroupPoint.x = drawMinX
-            treeGroupNode.treeGroupPoint.y = (treeGroupNode.groupLevel + 10.dp) * nodeHeight
+            treeGroupNode.treeGroupPoint.y = (treeGroupNode.groupLevel + 10) * nodeHeight
             groupNodeList.add(treeGroupNode)
-            Log.i("11","-->x = ${ treeGroupNode.treeGroupPoint.x}  -->y = ${treeGroupNode.treeGroupPoint.y}")
         }
 
     }
