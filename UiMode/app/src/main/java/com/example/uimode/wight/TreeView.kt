@@ -5,13 +5,9 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.Log
-import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
 import com.example.uimode.R
-import com.example.uimode.activity.tree.ui.FamilyMemberView
+import com.example.uimode.mode.treemode.TreeGroupNode
 import com.example.uimode.mode.treemode.TreeNode
 import com.wanggang.familytree.dp
 
@@ -19,7 +15,7 @@ class TreeView : ViewGroup {
     //treeView的宽高
     private var viewWidth =0
     private var viewHeight =0
-    var mNodeList:MutableList<TreeNode> = ArrayList()
+    var groupNodeList: MutableList<TreeGroupNode> = ArrayList()
     //屏幕最大宽度
     private var viewMaxWidth =0
     var paint:Paint = Paint()
@@ -73,15 +69,16 @@ class TreeView : ViewGroup {
 
         for (i in 0 until childCount){
 
-            left = mNodeList[i].point.x - getChildAt(i).measuredWidth
-            right = mNodeList[i].point.x
-            top = mNodeList[i].point.y - (getChildAt(i).measuredHeight+30)
-            bottom = mNodeList[i].point.y
+            left = groupNodeList[i].treeGroupPoint.x - getChildAt(i).measuredWidth
+            right = groupNodeList[i].treeGroupPoint.x
+            top = groupNodeList[i].treeGroupPoint.y - (getChildAt(i).measuredHeight+30)
+            bottom = groupNodeList[i].treeGroupPoint.y
 
             if (viewMaxWidth<right) {
                 viewMaxWidth = right
             }
-            (getChildAt(i) as MPersonView).layout(left,top,right,bottom)
+          //  (getChildAt(i) as MPersonView).layout(left,top,right,bottom)
+            (getChildAt(i) as GroupLayoutView).layout(left,top,right,bottom)
 
         }
     }
@@ -90,19 +87,15 @@ class TreeView : ViewGroup {
      * 添加view
      */
    // fun showUI(list: ArrayList<String>){
-    fun showUI(nodeList:MutableList<TreeNode>){
-        mNodeList.clear()
-        mNodeList.addAll(nodeList)
+    fun showUI(groupNodeList: MutableList<TreeGroupNode>){
+        groupNodeList.clear()
+        groupNodeList.addAll(groupNodeList)
         //清屏
         removeAllViews()
-        for (i in 0 until nodeList.size){
+        for (i in 0 until groupNodeList.size){
 
-            var view=MPersonView (context)
-            view.setText(nodeList[i].name)
-            view.setOnClickListener {
-                Log.i("11","-->level =${nodeList[i].level} levelNum = ${nodeList[i].levelNum}")
-                Toast.makeText(context,"-->level =${nodeList[i].level} levelNum = ${nodeList[i].levelNum}",Toast.LENGTH_SHORT).show()
-            }
+            var view = GroupLayoutView(context)
+            view.setView()
             addView(view)
         }
         postInvalidate()
@@ -113,22 +106,21 @@ class TreeView : ViewGroup {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         Log.i("11","--->执行了ondraw")
-        drawLine( canvas,paint,mNodeList[mNodeList.size-1]);
-        //Log.i("11","--->${mNodeList[mNodeList.size-1]}")
+        //drawLine( canvas,paint,groupNodeList[groupNodeList.size-1]);
     }
 
     /**`
      * 画线
      */
-    private fun drawLine(mCanvas: Canvas?,mPaint: Paint,treeNode: TreeNode?){
-        treeNode?.let {
+    private fun drawLine(mCanvas: Canvas?,mPaint: Paint,treeGroupNode: TreeGroupNode?){
+        treeGroupNode?.let {
 
-            if (treeNode.children.size>0){
-                for (element in treeNode.children) {
-                    mCanvas?.drawLine((treeNode.point.x).toFloat() - getChildAt(0).measuredWidth/2-10,
-                            (treeNode.point.y).toFloat()-30,
-                            (element.point.x).toFloat() - getChildAt(0).measuredWidth/2,
-                            (element.point.y).toFloat() - getChildAt(0).measuredHeight-30,
+            if (treeGroupNode.groupNodeChildren.size>0){
+                for (element in treeGroupNode.groupNodeChildren) {
+                    mCanvas?.drawLine((treeGroupNode.treeGroupPoint.x).toFloat() - getChildAt(0).measuredWidth/2-10,
+                            (treeGroupNode.treeGroupPoint.y).toFloat()-30,
+                            (element.treeGroupPoint.x).toFloat() - getChildAt(0).measuredWidth/2,
+                            (element.treeGroupPoint.y).toFloat() - getChildAt(0).measuredHeight-30,
                             paint)
                     drawLine(mCanvas, mPaint, element)
                 }
