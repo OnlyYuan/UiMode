@@ -15,7 +15,6 @@ class MPersonView: LinearLayout {
     constructor(context: Context) : super(context){
         var view = View.inflate(context,R.layout.activity_member_item,this)
         textView = view.findViewById<TextView>(R.id.member_status)
-        view.setOnClickListener()
     }
 
     constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet)

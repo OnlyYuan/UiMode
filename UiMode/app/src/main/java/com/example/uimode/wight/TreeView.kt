@@ -98,9 +98,7 @@ class TreeView : ViewGroup {
 
             var view=MPersonView (context)
             view.setText(nodeList[i].name)
-            view.setOnClickListener(v->{
 
-            })
             addView(view)
         }
         postInvalidate()
