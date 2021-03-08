@@ -12,13 +12,12 @@ import com.wanggang.familytree.dp
 
 class TreeActivity : AppCompatActivity() {
     var mName = arrayListOf<String>("团队1")
-//    var twoNodes = arrayOf(arrayOf("张三", "张三兄弟"), arrayOf("李四"), arrayOf("王五", "王五兄弟"), arrayOf("狗蛋"))
-//    var twoNodes2 = arrayOf(arrayOf("张三1", "李四1", "王五1"), arrayOf("王五2", "李四2", "王五2", "niuniu"),
-//            arrayOf("张三3", "李四3"), arrayOf("张三4", "李四4", "王五4"))
+    var twoNodes = arrayOf(arrayOf("张三", "张三兄弟"), arrayOf("李四"), arrayOf("王五", "王五兄弟"), arrayOf("狗蛋"))
+    var twoNodes2 = arrayOf(arrayOf("张三1", "李四1", "王五1"), arrayOf("王五2", "李四2", "王五2", "niuniu"),
+            arrayOf("张三3", "李四3"), arrayOf("张三4", "李四4", "王五4"))
 
-    var twoNodes = arrayOf(arrayOf("张三", "张三兄弟"), arrayOf("李四"),)
-    var twoNodes2 = arrayOf(arrayOf("张三1"), arrayOf("王五2", "李四2")
-            )
+//    var twoNodes = arrayOf(arrayOf("张三", "张三兄弟"), arrayOf("李四"))
+//    var twoNodes2 = arrayOf(arrayOf("张三1"), arrayOf("王五2", "李四2") )
 
     //节点的list
     private var groupNodeList: MutableList<TreeGroupNode> = ArrayList()
@@ -26,6 +25,9 @@ class TreeActivity : AppCompatActivity() {
     lateinit var treeView: TreeView
     lateinit var treeNode: TreeNode
     lateinit var treeGroupNode: TreeGroupNode
+    var screenWidth = 0  //屏幕的宽
+    var screenHeight = 0 //屏幕的高
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,7 @@ class TreeActivity : AppCompatActivity() {
         }
         Log.i("11"," ---> list大小${groupNodeList.size}")
         treeView = findViewById<TreeView>(R.id.treeView)
-        treeView.showUI(groupNodeList)
+        treeView.showUI(groupNodeList,screenWidth,screenHeight)
     }
 
     private fun initData() {
@@ -121,8 +123,14 @@ class TreeActivity : AppCompatActivity() {
             //计算单个叶子group 的宽度
             cMaxX = cWidth + (nodeWidth +1)*treeGroupNode.treeNodeList.size
             drawMinX += cMaxX + nodeSpace
+            screenWidth += drawMinX
+            var mCountHeight = (treeGroupNode.groupLevel + 1) * nodeHeight
+            if (screenHeight<mCountHeight){
+                screenHeight = mCountHeight
+            }
+
             treeGroupNode.treeGroupPoint.x = drawMinX
-            treeGroupNode.treeGroupPoint.y = (treeGroupNode.groupLevel + 1) * nodeHeight
+            treeGroupNode.treeGroupPoint.y = mCountHeight
             groupNodeList.add(treeGroupNode)
         }
 

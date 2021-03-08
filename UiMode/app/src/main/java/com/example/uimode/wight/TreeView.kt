@@ -11,10 +11,15 @@ import com.example.uimode.mode.treemode.TreeGroupNode
 import com.example.uimode.mode.treemode.TreeNode
 import com.wanggang.familytree.dp
 
+/**
+ * @author cpf
+ * 关系树自定义view
+ */
+
 class TreeView : ViewGroup {
     //treeView的宽高
-    private var viewWidth =0
-    private var viewHeight =0
+    private var screenWidth =0
+    private var screenHeight =0
     var groupNodeList: MutableList<TreeGroupNode> = ArrayList()
     //屏幕最大宽度
     private var viewMaxWidth =0
@@ -56,7 +61,7 @@ class TreeView : ViewGroup {
         }
 
         Log.i("11","屏幕的宽度$viewMaxWidth")
-        setMeasuredDimension(widthMeasureSpec, heightMeasureSpec)
+        setMeasuredDimension(screenWidth, screenHeight)
     }
 
 
@@ -87,8 +92,10 @@ class TreeView : ViewGroup {
     /**
      * 添加view
      */
-   // fun showUI(list: ArrayList<String>){
-    fun showUI(mGroupNodeList: MutableList<TreeGroupNode>){
+
+    fun showUI(mGroupNodeList: MutableList<TreeGroupNode>, mWidth:Int ,mHeight:Int){
+        screenWidth = mWidth
+        screenHeight = mHeight
         groupNodeList.clear()
         groupNodeList.addAll(mGroupNodeList)
         //清屏
@@ -130,5 +137,8 @@ class TreeView : ViewGroup {
         }
 
     }
+
+
+
 
 }

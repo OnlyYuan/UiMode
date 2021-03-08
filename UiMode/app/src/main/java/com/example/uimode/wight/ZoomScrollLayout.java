@@ -122,6 +122,7 @@ public class ZoomScrollLayout extends RelativeLayout implements ScaleGestureDete
      * 执行缩放操作
      */
     public void applyScale(float scale) {
+      
         mChildView.setScaleX(scale);
         mChildView.setScaleY(scale);
     }
