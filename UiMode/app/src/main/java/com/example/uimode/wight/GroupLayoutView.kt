@@ -47,4 +47,15 @@ class GroupLayoutView :LinearLayout{
 
      }
 
+
+    /**
+     * 获取当前的msg
+     */
+    fun getChildMsg(){
+
+
+
+    }
+
+
 }

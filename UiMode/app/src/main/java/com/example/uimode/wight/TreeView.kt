@@ -6,10 +6,12 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.Log
 import android.view.ViewGroup
+import androidx.core.view.children
 import com.example.uimode.R
 import com.example.uimode.mode.treemode.TreeGroupNode
 import com.example.uimode.mode.treemode.TreeNode
 import com.wanggang.familytree.dp
+import kotlin.math.max
 
 /**
  * @author cpf
@@ -20,10 +22,12 @@ class TreeView : ViewGroup {
     //treeView的宽高
     private var screenWidth =0
     private var screenHeight =0
-    var groupNodeList: MutableList<TreeGroupNode> = ArrayList()
+    private var groupNodeList: MutableList<TreeGroupNode> = ArrayList()
     //屏幕最大宽度
     private var viewMaxWidth =0
-    var paint:Paint = Paint()
+    private var paint:Paint = Paint()
+    var currentScale = 0.0f
+    var listSize =0
 
     constructor(context: Context):super(context){
         init()
@@ -60,10 +64,10 @@ class TreeView : ViewGroup {
             measureChild(getChildAt(i), widthMeasureSpec, heightMeasureSpec)
         }
 
-        Log.i("11","屏幕的宽度$viewMaxWidth")
+        //currentScale = max(1.0f*screenWidth/widthMeasureSpec,1.0f*screenHeight/heightMeasureSpec)
+        Log.i("11","屏幕的宽度$viewMaxWidth ---->currentScale${currentScale}")
         setMeasuredDimension(screenWidth, screenHeight)
     }
-
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
 
@@ -98,6 +102,7 @@ class TreeView : ViewGroup {
         screenHeight = mHeight
         groupNodeList.clear()
         groupNodeList.addAll(mGroupNodeList)
+        listSize = groupNodeList.size
         //清屏
         removeAllViews()
         Log.i("11","------->xunhuan的大小${mGroupNodeList.size} ")
@@ -108,7 +113,6 @@ class TreeView : ViewGroup {
             addView(view)
         }
         postInvalidate()
-
       // requestLayout()
     }
 
@@ -118,7 +122,7 @@ class TreeView : ViewGroup {
         drawLine( canvas,paint,groupNodeList[groupNodeList.size-1]);
     }
 
-    /**`
+    /**
      * 画线
      */
     private fun drawLine(mCanvas: Canvas?,mPaint: Paint,treeGroupNode: TreeGroupNode?){
@@ -135,10 +139,31 @@ class TreeView : ViewGroup {
                 }
             }
         }
-
     }
 
 
+    /**
+     * 获取当前子view的
+     */
+    fun  getChildrenList():MutableList<GroupLayoutView>{
+        var childrenList = ArrayList<GroupLayoutView>()
+        childrenList.clear()
+        for (i in 0 until childCount){
+            childrenList.add(getChildAt(i) as GroupLayoutView)
+        }
+        return childrenList
+    }
+
+
+    /**
+     * 获取当前子view的坐标
+     */
+    fun getChildPositionList(){
+        for (i in 0 until childCount){
+
+
+        }
+    }
 
 
 }

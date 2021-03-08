@@ -2,6 +2,7 @@ package com.example.uimode.wight;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -10,7 +11,7 @@ import android.view.ViewConfiguration;
 import android.widget.RelativeLayout;
 
 /**
- * Created by wg on 2017/4/21.
+ *
  */
 
 public class ZoomScrollLayout2 extends RelativeLayout implements ScaleGestureDetector.OnScaleGestureListener {
@@ -18,12 +19,13 @@ public class ZoomScrollLayout2 extends RelativeLayout implements ScaleGestureDet
     private ScaleGestureDetector mScaleDetector;
     private GestureDetector mGestureDetector;
     private static final float MIN_ZOOM = 0.3f;
-    private static final float MAX_ZOOM = 3.0f;
+    private static final float MAX_ZOOM = 5.0f;
 
     private int mLeft, mTop, mRight, mBottom;
     private int centerX, centerY;
     private float mLastScale = 1.0f;
     private float totleScale = 1.0f;
+    TreeView treeView ;
 
     // childview
     private View mChildView;
@@ -68,6 +70,7 @@ public class ZoomScrollLayout2 extends RelativeLayout implements ScaleGestureDet
     }
 
     public void init(Context context) {
+        treeView = new TreeView(context);
         mScaleDetector = new ScaleGestureDetector(context, this);
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -88,9 +91,10 @@ public class ZoomScrollLayout2 extends RelativeLayout implements ScaleGestureDet
                     int newT = mTop - (int) distanceY;
                     int newR = mRight - (int) distanceX;
                     int newB = mBottom - (int) distanceY;
+
                     mChildView.layout(newL, newT, newR, newB);
                 }
-                return true;
+               return true;
             }
         });
 
@@ -139,13 +143,14 @@ public class ZoomScrollLayout2 extends RelativeLayout implements ScaleGestureDet
     public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
         if (mode == MODE.ZOOM) {
             float scaleFactor = scaleGestureDetector.getScaleFactor();
-           float mx =  scaleGestureDetector.getFocusX();
-            float my = scaleGestureDetector.getFocusY();
+            float mx =  scaleGestureDetector.getFocusX();
+            float my =  scaleGestureDetector.getFocusY();
             float tempScale = mLastScale * scaleFactor;
             if (tempScale <= MAX_ZOOM && tempScale >= MIN_ZOOM) {
                 totleScale = tempScale;
                 applyScale(totleScale,mx,my);
             }
+
         }
         return false;
     }
@@ -169,12 +174,14 @@ public class ZoomScrollLayout2 extends RelativeLayout implements ScaleGestureDet
 
                 centerX = getWidth() / 2;
                 centerY = getHeight() / 2;
-            }
+
 
             mLeft = mChildView.getLeft();
             mTop = mChildView.getTop();
             mRight = mChildView.getRight();
             mBottom = mChildView.getBottom();
+            }
+
         }
 
         return true;

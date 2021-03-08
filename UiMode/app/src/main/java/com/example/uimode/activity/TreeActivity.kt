@@ -8,16 +8,17 @@ import com.example.uimode.mode.treemode.TreeGroupNode
 import com.example.uimode.mode.treemode.TreeNode
 import com.example.uimode.mode.treemode.TreePoint
 import com.example.uimode.wight.TreeView
+import com.example.uimode.wight.ZoomScrollLayout2
 import com.wanggang.familytree.dp
 
 class TreeActivity : AppCompatActivity() {
     var mName = arrayListOf<String>("团队1")
-    var twoNodes = arrayOf(arrayOf("张三", "张三兄弟"), arrayOf("李四"), arrayOf("王五", "王五兄弟"), arrayOf("狗蛋"))
-    var twoNodes2 = arrayOf(arrayOf("张三1", "李四1", "王五1"), arrayOf("王五2", "李四2", "王五2", "niuniu"),
-            arrayOf("张三3", "李四3"), arrayOf("张三4", "李四4", "王五4"))
+//    var twoNodes = arrayOf(arrayOf("张三", "张三兄弟"), arrayOf("李四"), arrayOf("王五", "王五兄弟"), arrayOf("狗蛋"))
+//    var twoNodes2 = arrayOf(arrayOf("张三1", "李四1", "王五1"), arrayOf("王五2", "李四2", "王五2", "niuniu"),
+//            arrayOf("张三3", "李四3"), arrayOf("张三4", "李四4", "王五4"))
 
-//    var twoNodes = arrayOf(arrayOf("张三", "张三兄弟"), arrayOf("李四"))
-//    var twoNodes2 = arrayOf(arrayOf("张三1"), arrayOf("王五2", "李四2") )
+    var twoNodes = arrayOf(arrayOf("张三", "张三兄弟"), arrayOf("李四"))
+    var twoNodes2 = arrayOf(arrayOf("张三1"), arrayOf("王五2", "李四2") )
 
     //节点的list
     private var groupNodeList: MutableList<TreeGroupNode> = ArrayList()
@@ -45,7 +46,6 @@ class TreeActivity : AppCompatActivity() {
     }
 
     private fun initData() {
-
         treeGroupNode = TreeGroupNode()
         treeGroupNode.groupLevel = 0
         treeGroupNode.groupLevelNum = "0"

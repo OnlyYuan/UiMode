@@ -7,10 +7,9 @@
     tools:context=".activity.TreeActivity"
     >
 
-        <com.example.uimode.wight.ZoomScrollLayout2
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+    <com.example.uimode.wight.ZoomScrollLayout2
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
             <com.example.uimode.wight.TreeView
                 android:id="@+id/treeView"
@@ -18,7 +17,6 @@
                 android:layout_height="match_parent"
                 />
 
-        </com.example.uimode.wight.ZoomScrollLayout2>
-
+    </com.example.uimode.wight.ZoomScrollLayout2>
 
 </LinearLayout>

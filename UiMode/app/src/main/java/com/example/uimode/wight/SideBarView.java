@@ -65,6 +65,7 @@ public class SideBarView extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mWidth = MeasureSpec.getSize(widthMeasureSpec);
         mHeight = MeasureSpec.getSize(heightMeasureSpec);
+
         if (mIsEqualItemSpace) {//均分Item间距模式
             mItemHeightSize = (mHeight - (mPaddingTop + mPaddingBottom)) / mContentDataList.size();//高度 - 上下边距 / Item的数量 = 一个Item的高度
         } else {                //自定义Item间距模式
