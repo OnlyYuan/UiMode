@@ -1,17 +1,15 @@
 package com.example.uimode.activity
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import com.example.uimode.R
 import com.example.uimode.mode.treemode.TreeGroupNode
 import com.example.uimode.mode.treemode.TreeNode
-import com.example.uimode.mode.treemode.TreePoint
 import com.example.uimode.wight.TreeView
-import com.example.uimode.wight.ZoomScrollLayout2
 import com.wanggang.familytree.dp
 
-class TreeActivity : AppCompatActivity() {
+class TreeActivity : Activity() {
     var mName = arrayListOf<String>("团队1")
 //    var twoNodes = arrayOf(arrayOf("张三", "张三兄弟"), arrayOf("李四"), arrayOf("王五", "王五兄弟"), arrayOf("狗蛋"))
 //    var twoNodes2 = arrayOf(arrayOf("张三1", "李四1", "王五1"), arrayOf("王五2", "李四2", "王五2", "niuniu"),
@@ -33,6 +31,7 @@ class TreeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tree)
+
         initData()
         groupNodeList.clear()
         setCoordinate(treeGroupNode)

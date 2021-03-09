@@ -77,8 +77,8 @@ public class ZoomScrollLayout extends RelativeLayout implements ScaleGestureDete
                     mChildView = getChildAt(0);
 
                     centerX = getWidth() / 2;
-
                     centerY = getHeight() / 2;
+
                 }
                 mChildView.setTranslationX(mChildView.getTranslationX() - distanceX);
                 mChildView.setTranslationY(mChildView.getTranslationY() - distanceY);

@@ -14,7 +14,7 @@ import com.wanggang.familytree.dp
 class GroupLayoutView :LinearLayout{
    private lateinit var mLi:LinearLayout
    private lateinit var btn: ImageView
-
+   private  var mTreeGroupNode =TreeGroupNode()
     constructor(context: Context) : super(context){
         var view = View.inflate(context, R.layout.group_layout_view,this)
         mLi = view.findViewById<LinearLayout>(R.id.m_li)
@@ -28,7 +28,7 @@ class GroupLayoutView :LinearLayout{
     constructor(context: Context, attributeSet: AttributeSet,defStyleAttr:Int) : super(context, attributeSet,defStyleAttr)
 
      fun setView(treeGroupNode : TreeGroupNode){
-
+         mTreeGroupNode = treeGroupNode
          val lp = LayoutParams(40.dp,60.dp)
          lp.setMargins(10.dp, 0, 0, 0) // 设置间距
 
@@ -37,12 +37,12 @@ class GroupLayoutView :LinearLayout{
              view.setText(element.name)
              view.layoutParams = lp
              mLi.addView(view)
-             view.setOnClickListener(){
-                 Toast.makeText(context,element.name,Toast.LENGTH_SHORT).show()
-             }
-             btn.setOnClickListener(){
-                 Toast.makeText(context,"添加 位置${treeGroupNode.groupLevel} , ${treeGroupNode.groupLevelNum}",Toast.LENGTH_SHORT).show()
-             }
+//             view.setOnClickListener(){
+//                 Toast.makeText(context,element.name,Toast.LENGTH_SHORT).show()
+//             }
+//             btn.setOnClickListener(){
+//                 Toast.makeText(context,"添加 位置${treeGroupNode.groupLevel} , ${treeGroupNode.groupLevelNum}",Toast.LENGTH_SHORT).show()
+//             }
          }
 
      }
@@ -51,9 +51,9 @@ class GroupLayoutView :LinearLayout{
     /**
      * 获取当前的msg
      */
-    fun getChildMsg(){
+    fun getChildMsg():String{
 
-
+       return "${mTreeGroupNode.groupLevel } ,levelNum:${mTreeGroupNode.groupLevelNum }"
 
     }
 

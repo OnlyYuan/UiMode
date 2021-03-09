@@ -20,4 +20,8 @@ class TreeItemPosition {
 
     //最右边值
     var right : Int = 0
+    
+    //值
+    var text :String = ""
+    
 }

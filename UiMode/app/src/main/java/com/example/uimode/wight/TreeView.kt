@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.ViewGroup
 import androidx.core.view.children
 import com.example.uimode.R
+import com.example.uimode.mode.TreeItemPosition
 import com.example.uimode.mode.treemode.TreeGroupNode
 import com.example.uimode.mode.treemode.TreeNode
 import com.wanggang.familytree.dp
@@ -110,6 +111,12 @@ class TreeView : ViewGroup {
 
             var view = GroupLayoutView(context)
             view.setView(groupNodeList[i])
+//            view.setOnClickListener(){
+//                var location = IntArray(2)
+//                getChildAt(i).getLocationOnScreen(location)
+//               Log.i("11","------>当前level是${(getChildAt(i) as GroupLayoutView).getChildMsg()}" +
+//                       "坐标是left:${location[0] } right:$${getChildAt(i).right} top: ${location[1]} bottom:${getChildAt(i).bottom}")
+//            }
             addView(view)
         }
         postInvalidate()
@@ -158,12 +165,20 @@ class TreeView : ViewGroup {
     /**
      * 获取当前子view的坐标
      */
-    fun getChildPositionList(){
+    fun getChildPositionList():MutableList<TreeItemPosition>{
+        var mItemPositionList = ArrayList<TreeItemPosition>()
         for (i in 0 until childCount){
+            var treeItemPosition = TreeItemPosition()
+            treeItemPosition.text = "-->当前坐标是${(getChildAt(i) as TreeGroupNode).groupLevel}  ${(getChildAt(i) as TreeGroupNode).groupLevelNum}"
+            treeItemPosition.left = getChildAt(i).left
+            treeItemPosition.right = getChildAt(i).right
+            treeItemPosition.top = getChildAt(i).top
+            treeItemPosition.bottom = getChildAt(i).bottom
 
-
+            mItemPositionList.add(treeItemPosition)
         }
-    }
 
+        return mItemPositionList
+    }
 
 }

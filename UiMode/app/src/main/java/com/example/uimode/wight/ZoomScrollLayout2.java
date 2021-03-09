@@ -64,11 +64,11 @@ public class ZoomScrollLayout2 extends RelativeLayout implements ScaleGestureDet
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
         mChildView = getChildAt(0);
-        centerX = getWidth() / 2;
+        centerX = (r-l)/ 2;
         centerY = getHeight() / 2;
-        mChildView.layout(0, 0, mChildView.getMeasuredWidth(), mChildView.getMeasuredHeight());
+        mChildView.layout(centerX-mChildView.getMeasuredWidth()/4, 0, mChildView.getMeasuredWidth(), mChildView.getMeasuredHeight());
     }
-
+    boolean isFirst = true;
     public void init(Context context) {
         treeView = new TreeView(context);
         mScaleDetector = new ScaleGestureDetector(context, this);
@@ -78,21 +78,20 @@ public class ZoomScrollLayout2 extends RelativeLayout implements ScaleGestureDet
                 if (mode == MODE.DRAG) {
                     if (mChildView == null) {
                         mChildView = getChildAt(0);
-
+                        Log.i("111","-->zixiangmwei");
                         centerX = getWidth() / 2;
                         centerY = getHeight() / 2;
                     }
-                    mLeft = mChildView.getLeft();
-                    mTop = mChildView.getTop();
-                    mRight = mChildView.getRight();
-                    mBottom = mChildView.getBottom();
 
-                    int newL = mLeft - (int) distanceX;
-                    int newT = mTop - (int) distanceY;
-                    int newR = mRight - (int) distanceX;
-                    int newB = mBottom - (int) distanceY;
+                    if (isFirst){
+                        isFirst = false;
+                        Log.i("111","isFirst-->distanceX"+distanceX +"-->distanceY" +distanceY);
+                    }else {
+                        Log.i("111","-->distanceX"+distanceX +"-->distanceY" +distanceY);
+                        mChildView.setTranslationX(mChildView.getTranslationX() - distanceX);
+                        mChildView.setTranslationY(mChildView.getTranslationY() - distanceY);
+                    }
 
-                    mChildView.layout(newL, newT, newR, newB);
                 }
                return true;
             }
@@ -113,20 +112,24 @@ public class ZoomScrollLayout2 extends RelativeLayout implements ScaleGestureDet
                 //记录上次滑动的位置
                 mDistansX = currentX;
                 mDistansY = currentY;
-
+                isFirst = true;
+                Log.i("111","-----> ACTION_DOWN");
                 //将当前的坐标保存为起始点
                 mode = MODE.DRAG;
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (Math.abs(mDistansX - currentX) >= mTouchSlop || Math.abs(mDistansY - currentY) >= mTouchSlop) {//父容器拦截
+                    Log.i("111","-----> 父容器");
                     return true;
                 }
                 break;
             //指点杆保持按下，并且进行位移
             //有手指抬起，将模式设为NONE
             case MotionEvent.ACTION_UP:
+
             case MotionEvent.ACTION_POINTER_UP:
                 mode = MODE.NONE;
+                Log.i("111","-----> up2");
                 break;
         }
         return super.onInterceptTouchEvent(e);
@@ -142,6 +145,7 @@ public class ZoomScrollLayout2 extends RelativeLayout implements ScaleGestureDet
     @Override
     public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
         if (mode == MODE.ZOOM) {
+            Log.i("111","-----> onScale..ZOOM");
             float scaleFactor = scaleGestureDetector.getScaleFactor();
             float mx =  scaleGestureDetector.getFocusX();
             float my =  scaleGestureDetector.getFocusY();
@@ -152,6 +156,7 @@ public class ZoomScrollLayout2 extends RelativeLayout implements ScaleGestureDet
             }
 
         }
+
         return false;
     }
 
@@ -168,6 +173,7 @@ public class ZoomScrollLayout2 extends RelativeLayout implements ScaleGestureDet
     @Override
     public boolean onScaleBegin(ScaleGestureDetector scaleGestureDetector) {
         mode = MODE.ZOOM;
+        Log.i("111","-----> onScaleBegin");
         if (mode == MODE.ZOOM) {
             if (mChildView == null) {
                 mChildView = getChildAt(0);
@@ -190,6 +196,7 @@ public class ZoomScrollLayout2 extends RelativeLayout implements ScaleGestureDet
     @Override
     public void onScaleEnd(ScaleGestureDetector scaleGestureDetector) {
         mLastScale = totleScale;
+        Log.i("111","-----> onScaleEnd");
     }
 
 }
