@@ -1,10 +1,14 @@
 package com.example.uimode.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -52,7 +56,6 @@ public class DragActivity extends AppCompatActivity implements View.OnTouchListe
         image = findViewById(R.id.image);
         relativeLayout =  findViewById(R.id.layout);
         recyclerView = findViewById(R.id.listview);
-
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

@@ -10,7 +10,10 @@ import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -24,14 +27,17 @@ import com.example.uimode.mode.api.ContactDao
 import com.example.uimode.wight.AppDatabase
 import com.example.uimode.wight.SideBarView
 import com.example.uimode.wight.Utils
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.sourceforge.pinyin4j.PinyinHelper
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType
+import java.lang.reflect.Type
 
-class PhoneLIstActivity : AppCompatActivity() {
+class PhoneLIstActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var mrecyclerView: RecyclerView
     lateinit var persionMsg: ContactEntity
     lateinit var mContracts: ArrayList<ContactEntity>
@@ -45,6 +51,8 @@ class PhoneLIstActivity : AppCompatActivity() {
 
     lateinit var layoutManager: LinearLayoutManager
     lateinit var search_btn: EditText
+    lateinit var selectorTips: TextView
+    lateinit var addBtn: TextView
 
     //数据库Dao
     lateinit var  contactDao:ContactDao
@@ -63,16 +71,12 @@ class PhoneLIstActivity : AppCompatActivity() {
                     endTime = System.currentTimeMillis()
                     var final = (endTime - beginTime) / 1000
                     Log.i("1111", "------->耗时：${final}")
-                    for (i in 0..count - 1) {
+                    for (i in 0 until count) {
                         Log.i("1111", "===>姓名:${mContracts[i].name}  手机号:${mContracts[i].phone}  userid:${mContracts[i].userId}")
                     }
-
                 }
-
             }
-
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,32 +87,24 @@ class PhoneLIstActivity : AppCompatActivity() {
         initData()
         checkPermission()
         Linsener()
-
     }
 
     private fun Linsener() {
-
+        addBtn.setOnClickListener(this)
         search_btn.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-
 
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
 
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
                 Log.i("1111", "=====>输入：${s.toString()}")
-
             }
-
-
         })
-
-
     }
 
     /**
@@ -121,22 +117,16 @@ class PhoneLIstActivity : AppCompatActivity() {
 
         } else {
             isUpdateVersion()
-
         }
-
     }
 
-
     private fun initData() {
-
-
         contactDao = AppDatabase.getDataBase(this).contactDao()
-
         firstMap = HashMap()
         mContracts2 = ArrayList()
         adapter = ContactsAdapter(this@PhoneLIstActivity, mContracts2);
         layoutManager = LinearLayoutManager(this)
-        mrecyclerView.setLayoutManager(layoutManager)
+        mrecyclerView.layoutManager = layoutManager
         mrecyclerView.adapter = adapter
     }
 
@@ -145,31 +135,36 @@ class PhoneLIstActivity : AppCompatActivity() {
         search_btn = findViewById(R.id.search_btn)
         mrecyclerView = findViewById(R.id.recyclerView)
         sideBarView = findViewById(R.id.sideBar)
+        selectorTips = findViewById(R.id.selector_tips)
+        addBtn = findViewById(R.id.add_confirm_button)
+
+
         sideBarView.setContentDataList(list)
         sideBarView.setEqualItemSpace(false)
         sideBarView.itemSpace(0)
+
         sideBarView.setOnClickListener(object : SideBarView.OnClickListener {
             override fun onItemDown(position: Int, itemContent: String?) {
 
                 //或者当前的字符
-                var mPostion = firstMap.get(itemContent)
-
-                Log.i("11", "--------->点击了${itemContent} 位置${mPostion}")
-                if (mPostion != null) {
-                    // adapter.setSeletedPostion(mPostion)
-                    layoutManager.scrollToPositionWithOffset(mPostion, 0)
+                var mPosition = firstMap[itemContent]
+                Toast.makeText(this@PhoneLIstActivity,"mPosition: "+mPosition,Toast.LENGTH_SHORT).show()
+                Log.i("11", "--------->点击了${itemContent} 位置${mPosition}")
+                if (mPosition != null) {
+                     adapter.setSeletedPostion(mPosition)
+                    layoutManager.scrollToPositionWithOffset(mPosition, 0)
                 }
 
             }
 
             override fun onItemMove(position: Int, itemContent: String?) {
                 //或者当前的字符
-                var mPostion = firstMap.get(itemContent)
+                var mPostion = firstMap[itemContent]
 
                 Log.i("11", "--------->点击了${itemContent} 位置${mPostion}")
                 if (mPostion != null) {
-                    // adapter.setSeletedPostion(mPostion)
-                    layoutManager.scrollToPositionWithOffset(mPostion, 0)
+                     adapter.setSeletedPostion(mPostion)
+                     layoutManager.scrollToPositionWithOffset(mPostion, 0)
                 }
             }
 
@@ -178,10 +173,8 @@ class PhoneLIstActivity : AppCompatActivity() {
             }
 
         })
-        // sideBarView.setOnClickListener()
+
     }
-
-
 
 
     /**
@@ -189,7 +182,6 @@ class PhoneLIstActivity : AppCompatActivity() {
      */
     private fun getContacts(): ArrayList<ContactEntity> {
         val projectionString = arrayOf(
-
                 ContactsContract.Contacts._ID,
                 ContactsContract.Contacts.DISPLAY_NAME
         )
@@ -210,8 +202,7 @@ class PhoneLIstActivity : AppCompatActivity() {
         )?.use {
 
             while (it!!.moveToNext()) {
-               // var num2: String = it1.getString(it.getColumnIndex(ContactsContract.))
-                var mPersionMsg: ContactEntity = ContactEntity("","","","","",false)
+                var mPersionMsg: ContactEntity = ContactEntity("","","","","", isFirst = false)
                 var contactId: String = it.getString(it.getColumnIndex(ContactsContract.Contacts._ID))
                 var name: String = it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
 
@@ -236,10 +227,8 @@ class PhoneLIstActivity : AppCompatActivity() {
                                 contacts.add(mPersionMsg)
                             }
                         }
-
                         it1.close()
                     }
-
             }
             it.close()
             Log.i("11","1=====>: list总数： ${contacts.size} ")
@@ -247,10 +236,8 @@ class PhoneLIstActivity : AppCompatActivity() {
           for (i in 0 until contacts.size){
               Log.i("11","1=====>: 姓名： ${contacts[i].name}  电话： ${contacts[i].phone}")
           }
-
             getPinyin(contacts)
         }
-
         return contacts
     }
 
@@ -268,6 +255,7 @@ class PhoneLIstActivity : AppCompatActivity() {
     private fun showMsg() {
 
             mContracts = getContacts()
+            Log.i("222","-->showmsg大小：${mContracts.size}")
             saveData(mContracts)
 
             var message = Message()
@@ -290,7 +278,7 @@ class PhoneLIstActivity : AppCompatActivity() {
         var isFirstTent = ""
         var fPinyin = " "
         var fWord = " "
-        var isOther = false
+        var isOther = true
 
         var format = HanyuPinyinOutputFormat()
         format.toneType = HanyuPinyinToneType.WITHOUT_TONE
@@ -298,52 +286,49 @@ class PhoneLIstActivity : AppCompatActivity() {
         //  var format = HanyuPinyinOutputFormat()
         for (i in 0 until list.size) {
             fPinyin = " "
-            fWord = (list[i].name.get(0).toString())
+            fWord = (list[i].name[0].toString())
             if (fWord.matches(Regex("[\\u4E00-\\u9FA5]+"))) {//是汉字
                 fPinyin = PinyinHelper.toHanYuPinyinString(fWord, format, null, true)
 
                 Log.i("1111", "${fPinyin}:------------->${fPinyin}")
 
-                if (!(isFirstTent == fPinyin.get(0).toString())) {
+                if (isFirstTent != fPinyin[0].toString()) {
                     Log.i("1111", ":-1212121212------------>${i}")
                     list[i].isFirst = true
+
                     //记录字母首次出现的位置
-                    firstMap.set(fPinyin.get(0).toString(), i)
+                    firstMap[fPinyin[0].toString()] = i
                 } else {
                     list[i].isFirst = false
                 }
-                isFirstTent = fPinyin.get(0).toString()
+                isFirstTent = fPinyin[0].toString()
 
             } else {//其他
                 list[i].firstWord = "#"
-
+                isFirstTent = "#"
+                Log.i("222","--->其他")
                 if (isOther) {
+                    Log.i("222","--->其他1")
                     isOther = false
                     //记录字母首次出现的位置
-                    firstMap.set(isFirstTent, i)
+                    firstMap[isFirstTent] = i
                     list[i].isFirst = true
                 } else {
+                    Log.i("222","--->其他2")
                     list[i].isFirst = false
                 }
-                isFirstTent = "#"
+
             }
-
             list[i].firstWord = isFirstTent
-
+        }
+        firstMap.forEach{
+            Log.i("222","----->map:${it.key}..${ it.value}")
         }
 
-
+        saveFirstMap(firstMap)
         return list
     }
 
-
-    /**
-     * 搜索
-     */
-    public fun search() {
-
-
-    }
 
 
     /**
@@ -389,9 +374,10 @@ class PhoneLIstActivity : AppCompatActivity() {
                     Log.i("22222", "------>数据库没更新")
 
                     mContracts = getContactData()
+                    Log.i("22222", "------>getContactData=:${getContactData().size}")
                     var message = Message()
                     var bundle = Bundle()
-
+                    getFirstMap()
                     bundle.putSerializable("mContracts", mContracts)
                     bundle.putInt("size", mContracts.size)
                     message.data = bundle
@@ -408,11 +394,10 @@ class PhoneLIstActivity : AppCompatActivity() {
      * 将读取到都的数据传入到数据库中
      */
    private fun saveData(list: ArrayList<ContactEntity>){
-
-        for (i in list){
-            contactDao.insertContact(i)
-
-          }
+        Log.i("222","存入到数据库的大小：${list.size}")
+        for (i in 0 until list.size){
+            contactDao.insertContact(list[i])
+        }
     }
 
 
@@ -420,9 +405,53 @@ class PhoneLIstActivity : AppCompatActivity() {
      * 读取存在数据库中的联系人数据
      */
     private fun getContactData():ArrayList<ContactEntity>{
+      //  Log.i("222","------>读取存在数据库中的联系人数据：${contactDao.loadAllContact().size as ArrayList<ContactEntity>}")
+        var m = contactDao.loadAllContact() as ArrayList<ContactEntity>
+          Log.i("222","------>读取存在数据库中的联系人数据：${m.size}")
+        for(element in m){
+            Log.i("222","---->读出： ${element}")
+        }
+        return m
+    }
 
-        return contactDao.loadAllContact() as ArrayList<ContactEntity>
+
+    /**
+     * 读取首字母表的shareprefaces
+     */
+    private fun getFirstMap(){
+        var sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE)
+        val json = sharedPreferences.getString("first_map","")
+        val type = object : TypeToken<HashMap<String?, Int?>?>() {}.type
+        var gson = Gson()
+        firstMap.clear()
+        firstMap = gson.fromJson(json,type)
+    }
+
+
+    /**
+     * 存首字母map到shareprefaces
+     */
+    private fun saveFirstMap(map:HashMap<String,Int>){
+        var gson = Gson()
+        val json = gson.toJson(map)
+        Log.i("222","------>josn值：${json}")
+        var sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE)
+        val edit = sharedPreferences.edit()
+        edit.putString("first_map",json)
+        edit.apply()
 
     }
+
+    override fun onClick(v: View?) {
+       when(v){
+//           addBtn ->{//确定
+//            Log.i("222","--->btn")
+//
+//           }
+
+
+       }
+    }
+
 
 }

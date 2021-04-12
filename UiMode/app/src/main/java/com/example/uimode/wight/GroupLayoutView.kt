@@ -29,20 +29,20 @@ class GroupLayoutView :LinearLayout{
 
      fun setView(treeGroupNode : TreeGroupNode){
          mTreeGroupNode = treeGroupNode
-         val lp = LayoutParams(40.dp,60.dp)
-         lp.setMargins(10.dp, 0, 0, 0) // 设置间距
+         val lp = LayoutParams(30.dp,50.dp)
+         lp.setMargins(5.dp, 0, 0, 0) // 设置间距
 
          for (element in treeGroupNode.treeNodeList){
              var view = MPersonView(context)
              view.setText(element.name)
              view.layoutParams = lp
              mLi.addView(view)
-//             view.setOnClickListener(){
-//                 Toast.makeText(context,element.name,Toast.LENGTH_SHORT).show()
-//             }
-//             btn.setOnClickListener(){
-//                 Toast.makeText(context,"添加 位置${treeGroupNode.groupLevel} , ${treeGroupNode.groupLevelNum}",Toast.LENGTH_SHORT).show()
-//             }
+             view.setOnClickListener(){
+                 Toast.makeText(context,element.name,Toast.LENGTH_SHORT).show()
+             }
+             btn.setOnClickListener(){
+                 Toast.makeText(context,"添加 位置${treeGroupNode.groupLevel} , ${treeGroupNode.groupLevelNum}",Toast.LENGTH_SHORT).show()
+             }
          }
 
      }

@@ -1,4 +1,4 @@
-package com.example.uimode.activity;
+package com.example.uimode;
 
 import android.app.Application;
 

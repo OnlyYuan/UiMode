@@ -14,7 +14,7 @@ public class ChildTreeModeNode {
 
     private String picString;//头像
 
-    //兄弟
+    //内部兄弟
     private List<TreeBotherMode > botherList = new ArrayList<TreeBotherMode >();
 
     //孩子节点

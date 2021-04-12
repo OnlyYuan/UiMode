@@ -10,5 +10,12 @@
     <color name="green">#0636A95C</color>
     <color name="green_2">#36A95C</color>
     <color name="text_color">#969696</color>
+    <color name="auth_dark_color">#55000000</color>
 
+    <color name="auth_white">#ffffff</color>
+
+    <color name="common_btn_primary_color_normal">#36A95C</color>
+
+    <color name="common_btn_primary_color_pressed">#E636A95C</color>
+    <color name="auth_gray">#aaa</color>
 </resources>

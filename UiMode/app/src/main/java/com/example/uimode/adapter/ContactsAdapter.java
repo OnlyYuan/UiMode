@@ -49,6 +49,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         holder.name.setText(personMsgs.get(position).getName());
         holder.phone.setText(personMsgs.get(position).getPhone());
+        holder.num.setText("位置:"+position);
 
         if (personMsgs.get(position).isFirst()){
             tips = personMsgs.get(position).getFirstWord();
@@ -57,6 +58,14 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         }else {
             holder.tips_table.setVisibility(View.GONE);
         }
+        
+        if(personMsgs.get(position).isSelector()){
+            holder.select_state.setImageResource(R.mipmap.selector_ture);
+        }else {
+            holder.select_state.setImageResource(R.mipmap.selector_false);
+        }
+        
+        
     }
 
     @Override
@@ -80,19 +89,24 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     class  ViewHolder extends RecyclerView.ViewHolder{
         ImageView headImg;
+        ImageView select_state;
         TextView  name;
         TextView  phone;
         TextView  add_btn;
         TextView  add_status;
         TextView  tips_table;
+        TextView  num;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            select_state = itemView.findViewById(R.id.select_state);
             headImg = itemView.findViewById(R.id.headImg);
             name = itemView.findViewById(R.id.name);
             phone = itemView.findViewById(R.id.phone);
             add_btn = itemView.findViewById(R.id.add_btn);
             add_status = itemView.findViewById(R.id.add_status);
             tips_table = itemView.findViewById(R.id.tips_table);
+            num = itemView.findViewById(R.id.num);
         }
     }
 }

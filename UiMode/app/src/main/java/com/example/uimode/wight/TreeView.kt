@@ -111,12 +111,6 @@ class TreeView : ViewGroup {
 
             var view = GroupLayoutView(context)
             view.setView(groupNodeList[i])
-//            view.setOnClickListener(){
-//                var location = IntArray(2)
-//                getChildAt(i).getLocationOnScreen(location)
-//               Log.i("11","------>当前level是${(getChildAt(i) as GroupLayoutView).getChildMsg()}" +
-//                       "坐标是left:${location[0] } right:$${getChildAt(i).right} top: ${location[1]} bottom:${getChildAt(i).bottom}")
-//            }
             addView(view)
         }
         postInvalidate()
@@ -136,13 +130,15 @@ class TreeView : ViewGroup {
         treeGroupNode?.let {
 
             if (treeGroupNode.groupNodeChildren.size>0){
-                for (element in treeGroupNode.groupNodeChildren) {
-                    mCanvas?.drawLine((treeGroupNode.treeGroupPoint.x).toFloat() - getChildAt(0).measuredWidth/2-10,
-                            (treeGroupNode.treeGroupPoint.y).toFloat()-30,
-                            (element.treeGroupPoint.x).toFloat() - getChildAt(0).measuredWidth/2,
-                            (element.treeGroupPoint.y).toFloat() - getChildAt(0).measuredHeight-30,
+                for (i in treeGroupNode.groupNodeChildren.indices) {
+                    treeGroupNode.groupNodeChildren.size
+                   // mCanvas?.drawLine((treeGroupNode.treeGroupPoint.x).toFloat() - getChildAt(0).measuredWidth/2-15.dp,
+                    mCanvas?.drawLine((treeGroupNode.treeGroupPoint.x).toFloat() -  (treeGroupNode.groupNodeChildren.size*25.dp/2),
+                            (treeGroupNode.treeGroupPoint.y).toFloat()-15.dp,
+                            (treeGroupNode.groupNodeChildren[i].treeGroupPoint.x).toFloat() - getChildAt(0).measuredWidth/2,
+                            (treeGroupNode.groupNodeChildren[i].treeGroupPoint.y).toFloat() - getChildAt(0).measuredHeight-15.dp,
                             paint)
-                    drawLine(mCanvas, mPaint, element)
+                    drawLine(mCanvas, mPaint, treeGroupNode.groupNodeChildren[i])
                 }
             }
         }

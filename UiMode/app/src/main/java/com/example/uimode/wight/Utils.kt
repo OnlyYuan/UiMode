@@ -1,5 +1,8 @@
 package com.example.uimode.wight
 
+import android.content.Context
+import android.content.SharedPreferences
+import com.google.gson.Gson
 import java.security.MessageDigest
 import kotlin.experimental.and
 
@@ -26,5 +29,24 @@ open class Utils {
             md5 = sbString.toString()
             return md5
         }
+
+
+
+//        private void saveHashMap(HashMap<String,PeopleBean> map){
+//
+//            Gson gson = new Gson();
+//            String json = gson.toJson(map);
+//
+//            //步骤1：创建一个SharedPreferences对象
+//            SharedPreferences sharedPreferences= getSharedPreferences("config", Context.MODE_PRIVATE);
+//            //步骤2： 实例化SharedPreferences.Editor对象
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            //步骤3：将获取过来的值放入文件
+//            editor.putString("config",json);
+//            editor.commit();
+//
+//
+//        }
+
     }
 }

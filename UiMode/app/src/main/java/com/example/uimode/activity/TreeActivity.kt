@@ -3,24 +3,23 @@ package com.example.uimode.activity
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import com.alibaba.fastjson.JSON
 import com.example.uimode.R
 import com.example.uimode.mode.treemode.TreeGroupNode
 import com.example.uimode.mode.treemode.TreeNode
 import com.example.uimode.wight.TreeView
+import com.google.gson.Gson
 import com.wanggang.familytree.dp
 
 class TreeActivity : Activity() {
     var mName = arrayListOf<String>("团队1")
-//    var twoNodes = arrayOf(arrayOf("张三", "张三兄弟"), arrayOf("李四"), arrayOf("王五", "王五兄弟"), arrayOf("狗蛋"))
-//    var twoNodes2 = arrayOf(arrayOf("张三1", "李四1", "王五1"), arrayOf("王五2", "李四2", "王五2", "niuniu"),
-//            arrayOf("张三3", "李四3"), arrayOf("张三4", "李四4", "王五4"))
-
+//    private var twoNodes = arrayOf(arrayOf("张三", "张三兄弟"), arrayOf("李四"), arrayOf("王五", "王五兄弟"), arrayOf("狗蛋"))
+//    private var twoNodes2 = arrayOf(arrayOf("张三1", "李四1", "王五1"), arrayOf("王五2", "李四2", "王五2", "niuniu"),arrayOf("张三3", "李四3"), arrayOf("张三4", "李四4", "王五4"))
     var twoNodes = arrayOf(arrayOf("张三", "张三兄弟"), arrayOf("李四"))
     var twoNodes2 = arrayOf(arrayOf("张三1"), arrayOf("王五2", "李四2") )
 
     //节点的list
     private var groupNodeList: MutableList<TreeGroupNode> = ArrayList()
-
     lateinit var treeView: TreeView
     lateinit var treeNode: TreeNode
     lateinit var treeGroupNode: TreeGroupNode
@@ -85,11 +84,13 @@ class TreeActivity : Activity() {
 
             treeGroupNode.groupNodeChildren.add(childGroupNode)
         }
+        var json = JSON.toJSONString(treeGroupNode)
+        Log.i("2222","1--->${json}")
     }
 
 
-    private val nodeWidth = 40.dp
-    private val nodeHeight = 130.dp
+    private val nodeWidth = 30.dp
+    private val nodeHeight = 80.dp
     //加号的所占的宽度
     private val cWidth = 40.dp
     private val nodeSpace = 30.dp
@@ -134,6 +135,8 @@ class TreeActivity : Activity() {
         }
 
     }
+
+
 }
 
 

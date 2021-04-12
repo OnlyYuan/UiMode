@@ -5,7 +5,7 @@ import com.example.uimode.mode.ContactEntity
 
 @Dao
 interface ContactDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertContact(contactEntity: ContactEntity)
 
     @Update

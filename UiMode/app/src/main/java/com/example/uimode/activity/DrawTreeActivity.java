@@ -14,6 +14,7 @@ import com.example.uimode.mode.TreeModePostion;
 import com.example.uimode.wight.TreeModeView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import kotlin.Unit;
@@ -66,7 +67,6 @@ public class DrawTreeActivity extends Activity {
 
 
     public void initView(){
-
         familyMemberLayout = findViewById(R.id.myview);
         familyMemberLayout.setFamilyTreeAdapter(new FamilyTreeAdapter());
     }

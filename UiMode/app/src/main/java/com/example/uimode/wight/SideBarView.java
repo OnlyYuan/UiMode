@@ -20,7 +20,7 @@ import java.util.List;
  * content: 自定义的字母定位侧边栏
  * time: 2020-4-24
  *
- * @author: guanxinjin
+ * @author:
  */
 public class SideBarView extends View {
     private List<String> mContentDataList = new ArrayList<>();

@@ -46,7 +46,7 @@ public class TreeModeView extends LinearLayout {
     }
 
     //点击按钮
-   public void onClick(){
+    public void onClick(){
 
 
    }
