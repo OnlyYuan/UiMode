@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
     private MainMenuAdapter mAdapter;
     private String[] mtitile={"拖拉效果","缩放","拖拉添加","树形画图","完整效果","相机","三级菜单","获取通讯录"
             ,"换肤green","换肤dark","默认主题","FlowLayout","treeView","dialogFragment","餅狀圖","图片动态"
-    ,"雷达图"};
+    ,"雷达图","贝塞尔曲线"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +108,12 @@ public class MainActivity extends Activity {
                     case 16:
                         startActivity(new Intent(MainActivity.this,SpiderActivity.class));
                         break;
+                    case 17:
+                        startActivity(new Intent(MainActivity.this,BezierActivity.class));
+                        break;
+
+
+
                 }
             }
         });

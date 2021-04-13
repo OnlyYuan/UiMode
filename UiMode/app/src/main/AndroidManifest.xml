@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SpiderActivity"></activity>
+        <activity android:name=".activity.BezierActivity"></activity>
+        <activity android:name=".activity.SpiderActivity" />
         <activity android:name=".activity.CheckImgActivity" />
         <activity android:name=".activity.PieChartActivity" />
         <activity
