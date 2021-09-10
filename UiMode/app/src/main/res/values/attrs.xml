@@ -1,0 +1,14 @@
+<resources>
+    <declare-styleable name="FullscreenAttrs">
+        <attr name="fullscreenBackgroundColor" format="color" />
+        <attr name="fullscreenTextColor" format="color" />
+    </declare-styleable>
+
+
+    <declare-styleable name="RadiusImageView">
+        <attr name="android:topLeftRadius" format="dimension"/>
+        <attr name="android:topRightRadius" format="dimension"/>
+        <attr name="android:bottomLeftRadius" format="dimension"/>
+        <attr name="android:bottomRightRadius" format="dimension"/>
+    </declare-styleable>
+</resources>

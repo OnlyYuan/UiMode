@@ -85,8 +85,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     }
 
-
-
     class  ViewHolder extends RecyclerView.ViewHolder{
         ImageView headImg;
         ImageView select_state;

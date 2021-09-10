@@ -8,7 +8,12 @@
     tools:context=".activity.DragAndAddActivity"
     android:layout_gravity="center">
 
-
+    <com.xuliwen.zoom.ZoomLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:max_zoom="3.0"
+        app:min_zoom="1.0"
+        app:double_click_zoom="2.0">
     <LinearLayout
         android:id="@+id/l_layout"
         android:layout_width="match_parent"
@@ -35,5 +40,5 @@
             android:src="@mipmap/ic_fog"
             />
     </LinearLayout>
-
+    </com.xuliwen.zoom.ZoomLayout>
 </RelativeLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.tree.CircleViewActivity">
+
+
+    <com.example.uimode.wight.CircleColorView
+        android:id="@+id/mView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        tools:ignore="MissingConstraints" />
+
+    <com.example.uimode.wight.RadiusImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@mipmap/car"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:scaleType="centerCrop"
+        android:topLeftRadius ="15dp"
+        android:topRightRadius = "15dp"
+        android:bottomRightRadius = "15dp"
+        android:bottomLeftRadius = "15dp"
+        />
+</RelativeLayout>

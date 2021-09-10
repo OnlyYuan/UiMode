@@ -29,10 +29,10 @@ public class ScaleActivity extends AppCompatActivity {
 //        hanzi.matches("[\\u4E00-\\u9FA5]+");
         m_layout = findViewById(R.id.m_layout);
         l_layout = findViewById(R.id.l_layout);
-        GestureViewBinder.bind(this, m_layout, l_layout);
-        String[]  projectionString = {ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
-                ContactsContract.Contacts.DISPLAY_NAME,
-                ContactsContract.CommonDataKinds.Phone.NUMBER};
+//        GestureViewBinder.bind(this, m_layout, l_layout);
+//        String[]  projectionString = {ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
+//                ContactsContract.Contacts.DISPLAY_NAME,
+//                ContactsContract.CommonDataKinds.Phone.NUMBER};
     }
 
 }

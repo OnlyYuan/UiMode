@@ -1,23 +1,17 @@
 package com.example.uimode.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.DataSetObserver;
+import android.content.pm.LauncherApps;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 
 import com.example.uimode.R;
-import com.example.uimode.adapter.MAdapter;
+import com.example.uimode.activity.tree.CircleViewActivity;
 import com.example.uimode.adapter.MainMenuAdapter;
+import com.example.uimode.java.JavaTest;
 import com.example.uimode.wight.CustomSDCardLoader;
 
 import skin.support.SkinCompatManager;
@@ -29,12 +23,16 @@ public class MainActivity extends Activity {
     private MainMenuAdapter mAdapter;
     private String[] mtitile={"拖拉效果","缩放","拖拉添加","树形画图","完整效果","相机","三级菜单","获取通讯录"
             ,"换肤green","换肤dark","默认主题","FlowLayout","treeView","dialogFragment","餅狀圖","图片动态"
-    ,"雷达图","贝塞尔曲线"};
+    ,"雷达图","贝塞尔曲线","快手","material design风格标题栏","侧滑","adil","自定义view","view事件体系","jiazigu",
+            "AnimatorSpring","BroadCastReceiver","circleView"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        JavaTest javaTest = new JavaTest();
+
+        int m = JavaTest.m;
         init();
         SkinCompatManager.getInstance().loadSkin("night.skin", null, CustomSDCardLoader.SKIN_LOADER_STRATEGY_SDCARD);
     }
@@ -111,9 +109,36 @@ public class MainActivity extends Activity {
                     case 17:
                         startActivity(new Intent(MainActivity.this,BezierActivity.class));
                         break;
-
-
-
+                    case 18:
+                        startActivity(new Intent(MainActivity.this,KuaiShouActivity.class));
+                        break;
+                    case 19:
+                        startActivity(new Intent(MainActivity.this,TitleScollActivity.class));
+                        break;
+                    case 20:
+                        startActivity(new Intent(MainActivity.this, CehuaActivity.class));
+                        break;
+                    case 21:
+                        startActivity(new Intent(MainActivity.this, AidlActivity.class));
+                        break;
+                    case 22:
+                        startActivity(new Intent(MainActivity.this, CustomViewActivity.class));
+                        break;
+                    case 23:
+                        startActivity(new Intent(MainActivity.this, ViewMotionActivity.class));
+                        break;
+                    case 24:
+                        startActivity(new Intent(MainActivity.this, JiaZiGuActivity.class));
+                        break;
+                    case 25:
+                        startActivity(new Intent(MainActivity.this, AnimatorSpringActivity.class));
+                        break;
+                    case 26:
+                        startActivity(new Intent(MainActivity.this, BroadcastActivity.class));
+                        break;
+                    case 27:
+                        startActivity(new Intent(MainActivity.this, CircleViewActivity.class));
+                        break;
                 }
             }
         });

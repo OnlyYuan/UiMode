@@ -27,8 +27,8 @@ class MyDialogFragment() : DialogFragment() {
         win?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         val dm = resources.displayMetrics
         val params = win?.attributes
-        params?.gravity = Gravity.CENTER
-        params?.width = dm.widthPixels*2/3
+        params?.gravity = Gravity.BOTTOM
+        params?.width = dm.widthPixels
         params?.height =  dm.heightPixels*2/3
         win?.attributes= params
     }

@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    viewBinding {
+        enabled true
+    }
 
 }
 
@@ -54,7 +57,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation group: 'com.github.bumptech.glide', name: 'glide', version: '4.11.0'
-    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.core:core-ktx:1.3.2"
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.github.GeniusLiu:GestureViewBinder:1.0.1'
@@ -84,6 +87,11 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.alibaba:fastjson:1.1.55.android'
 
+    //弹簧物理学控件
+    implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
+
+    //使用ZoomLayout
+    implementation 'com.xlw.zoom:zoomlayout:1.0.0'
 }
 repositories {
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }

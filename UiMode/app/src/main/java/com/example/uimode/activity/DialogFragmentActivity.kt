@@ -16,9 +16,9 @@ class DialogFragmentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dialog_fragment)
         val  mBtn = findViewById<Button>(R.id.mBtn)
-//        mBtn.setOnClickListener {
-//            initDialog()
-//        }
+        mBtn.setOnClickListener {
+            initDialog()
+        }
        var mList =  list.filter {
 
             "12" in it
@@ -31,10 +31,10 @@ class DialogFragmentActivity : AppCompatActivity() {
 
     }
 
-//    private fun initDialog() {
-//        val dialog = MyDialogFragment()
-//        dialog.show(supportFragmentManager,"dialog")
-//    }
+    private fun initDialog() {
+        val dialog = MyDialogFragment()
+        dialog.show(supportFragmentManager,"dialog")
+    }
 
 
 }

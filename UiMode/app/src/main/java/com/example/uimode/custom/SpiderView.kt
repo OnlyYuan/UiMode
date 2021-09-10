@@ -184,7 +184,6 @@ class SpiderView : View {
         path1.close()
         canvas?.drawPath(path1,scorePaint)
         canvas?.drawPath(path1,scoreStrokePaint)
-
     }
 
 

@@ -12,6 +12,7 @@ import com.google.gson.Gson
 import com.wanggang.familytree.dp
 
 class TreeActivity : Activity() {
+
     var mName = arrayListOf<String>("团队1")
 //    private var twoNodes = arrayOf(arrayOf("张三", "张三兄弟"), arrayOf("李四"), arrayOf("王五", "王五兄弟"), arrayOf("狗蛋"))
 //    private var twoNodes2 = arrayOf(arrayOf("张三1", "李四1", "王五1"), arrayOf("王五2", "李四2", "王五2", "niuniu"),arrayOf("张三3", "李四3"), arrayOf("张三4", "李四4", "王五4"))
